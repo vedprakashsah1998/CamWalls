@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true">
+
+
+<!--
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/imgFull"/>-->
+
+    <com.walls.vpman.finalapp.VerticalViewPageAdapter
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:id="@+id/imgFull07"/>
+
+   <!-- <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/imgView1"
+        android:scaleType="centerCrop"/>-->
+
+<!--<ProgressBar
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:id="@+id/progress6"
+    android:theme="@style/mypb"
+    android:visibility="gone"/>-->
+
+
+<!--
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/edit_search"
+
+        android:layout_centerVertical="true"
+        android:theme="@style/mypb"
+        android:padding="6dp"
+        android:visibility="gone"
+        android:id="@+id/progress"/>-->
+<!--
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_margin="16dp"
+        android:layout_height="50dp"
+        android:hint="Search Free Photo"
+        android:textColorHint="#070707"
+        android:paddingLeft="8dp"
+        android:textColor="#0C0C0C"
+        android:background="@drawable/edit_text"
+        android:layout_centerInParent="true"
+        android:id="@+id/edit_search"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:textCursorDrawable="@drawable/cursor_editext"
+        android:drawableRight="@drawable/ic_search_black_24dp"/>-->
+
+
+    <ImageView
+        android:layout_width="104dp"
+        android:layout_height="104dp"
+        android:id="@+id/nointernet"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_signal_wifi_off"/>
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="No Wifi"
+        android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/nointernet"
+        android:id="@+id/textNo"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="64dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/material_button"
+        android:text="Try Again"
+        android:layout_below="@+id/textNo"
+        android:visibility="gone"
+        android:background="#ffffff"
+        android:textColor="#000"/>
+
+
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_gravity="bottom"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        app:backgroundTint="#000"
+        app:srcCompat="@drawable/up"
+        app:tint="#fff"
+        app:borderWidth="0dp"
+        app:elevation="20dp"
+        android:clickable="true" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab07"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_gravity="bottom"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        app:backgroundTint="#000"
+        app:srcCompat="@drawable/down"
+        app:tint="#fff"
+        app:elevation="20dp"
+        app:borderWidth="0dp"
+        android:clickable="true" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/share"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        android:layout_alignParentRight="true"
+        android:layout_above="@+id/fab"
+        android:clickable="true"
+        android:layout_marginRight="16dp"
+        app:srcCompat="@drawable/ic_share_black_24dp"
+        app:tint="#fff"
+        android:visibility="gone"
+        app:borderWidth="0dp"
+
+        app:backgroundTint="#000"
+         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Share"
+        android:padding="6dp"
+        android:layout_margin="16dp"
+        android:layout_above="@+id/fab"
+        android:layout_toLeftOf="@+id/share"
+        android:id="@+id/tvshare"
+        android:textColor="#fff"
+        android:background="#000"
+        android:visibility="gone"
+
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/wallpaper"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_above="@+id/share"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        android:layout_alignParentRight="true"
+        android:clickable="true"
+        android:layout_marginRight="16dp"
+        app:tint="#fff"
+        app:backgroundTint="#000"
+        app:srcCompat="@drawable/ic_wallpaper"
+        app:borderWidth="0dp"
+
+        android:visibility="gone"
+      />
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Wallpaper"
+        android:padding="6dp"
+        android:layout_margin="16dp"
+        android:layout_above="@+id/share"
+        android:layout_toLeftOf="@+id/wallpaper"
+        android:id="@+id/tvwall"
+        android:textColor="#fff"
+        android:background="#000"
+        android:visibility="gone"
+
+        />
+
+
+
+
+
+
+</RelativeLayout>

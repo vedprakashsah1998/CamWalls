@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start"
+    android:id="@+id/Main"
+    tools:context=".MainActivity"
+    android:background="#000">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#8000"
+        app:titleMarginStart="10dp"
+        app:title="Cam Walls"
+        app:popupTheme="@style/ToolbarTheme1"
+        android:elevation="5dp"
+        app:titleTextColor="#FCFCFC"
+        app:collapseIcon="@drawable/back1"
+        app:titleTextAppearance="@style/Toolbar.TitleText"/>
+
+  <!--  <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/mainFragment"/>-->
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/view_Pager"/>
+
+
+   <!-- <com.walls.vpman.finalapp.VerticalViewPageAdapter
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
+        android:id="@+id/view_Pager" />-->
+
+
+<!--<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true">
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-6440414699659668/7199263512"/>
+
+</RelativeLayout>-->
+
+</RelativeLayout>
+</RelativeLayout>
+
+
+
+
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:itemIconTint="#F8FAFA"
+        android:background="#8000"
+        app:itemTextColor="#F9FDFCFC"
+        app:headerLayout="@layout/nav_header"
+        android:fitsSystemWindows="false"
+        app:menu="@menu/nav_menu"/>
+
+
+
+
+
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

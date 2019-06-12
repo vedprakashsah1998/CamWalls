@@ -1,0 +1,100 @@
+{
+  "project_info": {
+    "project_number": "908642639808",
+    "firebase_url": "https://finalapp-8e90b.firebaseio.com",
+    "project_id": "finalapp-8e90b",
+    "storage_bucket": "finalapp-8e90b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:908642639808:android:100d2675fc1e596a",
+        "android_client_info": {
+          "package_name": "com.example.vpman.finalapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "908642639808-m0060p6fc32nrlchssmqhjtukd00bm52.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.vpman.finalapp",
+            "certificate_hash": "a3be50c033727c6925f9f8581a2584a562ef0059"
+          }
+        },
+        {
+          "client_id": "908642639808-7e07tngdc5b61roehsv6atmn3vfevhju.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_BgDGHDgbjfsxsfL4dbFj7YMPwc6Sq7g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "908642639808-7e07tngdc5b61roehsv6atmn3vfevhju.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      },
+      "admob_app_id": "ca-app-pub-6440414699659668~9366477454"
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:908642639808:android:35706534afe9fe54",
+        "android_client_info": {
+          "package_name": "com.walls.vpman.finalapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "908642639808-5k0t8eub10hhgn875sv9emq8rrg9l1s2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.walls.vpman.finalapp",
+            "certificate_hash": "a3be50c033727c6925f9f8581a2584a562ef0059"
+          }
+        },
+        {
+          "client_id": "908642639808-7e07tngdc5b61roehsv6atmn3vfevhju.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_BgDGHDgbjfsxsfL4dbFj7YMPwc6Sq7g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "908642639808-7e07tngdc5b61roehsv6atmn3vfevhju.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

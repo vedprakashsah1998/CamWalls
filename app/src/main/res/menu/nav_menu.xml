@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="Home"/>
+    <item
+        android:id="@+id/share2"
+        android:icon="@drawable/ic_share1"
+        android:title="Share"/>
+
+        <item android:id="@+id/login"
+            android:icon="@drawable/log_in"
+            android:title="Login"/>
+
+    <item
+        android:id="@+id/category"
+        android:icon="@drawable/ic_star"
+        android:title="Category"/>
+
+
+      <!--  <item
+            android:id="@+id/photography"
+            android:icon="@drawable/ic_camera"
+            android:title="Photography"/>-->
+
+
+
+
+
+    <!--<item
+        android:id="@+id/collection"
+        android:icon="@drawable/ic_insert_photo"
+        android:title="Collection"/>-->
+    <item
+        android:id="@+id/rate_us"
+        android:icon="@drawable/ic_rate_review_black_24dp"
+        android:title="Rate Us"/>
+
+    <item
+        android:id="@+id/feedback"
+        android:icon="@drawable/ic_feedback"
+        android:title="Feedback"/>
+
+    <item
+        android:id="@+id/aboutus"
+        android:icon="@drawable/ic_info"
+        android:title="About Us"/>
+
+        <item
+            android:id="@+id/report"
+            android:title="Report Us"
+            android:icon="@drawable/ic_report"/>
+
+    </group>
+
+</menu>

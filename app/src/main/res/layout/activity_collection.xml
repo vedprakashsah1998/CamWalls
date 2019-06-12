@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#000"
+    tools:context=".Collection">
+
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/header1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#070707"
+        android:minHeight="?attr/actionBarSize"
+        app:popupTheme="@style/ToolbarTheme1"
+        android:elevation="5dp"
+        app:titleTextColor="#FDFCFC"
+        app:titleTextAppearance="@style/Toolbar.TitleText">
+
+    <ImageView
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:id="@+id/back2"
+        android:src="@drawable/ic_chevron_left_black_24dp"/>
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="200dp"
+        android:layout_height="44dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/dancingscript_regular"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:text="Collection"
+        android:textColor="#ffffff"
+        android:textSize="40sp"
+        android:textStyle="normal" />
+    </androidx.appcompat.widget.Toolbar>
+
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/header1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/cars"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/times_new_roman"
+                    android:text="Cars"
+                    android:textColor="#fff"
+                    android:textSize="20sp"
+                    android:textStyle="normal" />
+
+            </RelativeLayout>
+
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent">
+
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout_gridtableLayout"
+                        android:layout_width="1005dp"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+
+                        <GridView
+                            android:id="@+id/gridViewCars"
+                            android:layout_width="fill_parent"
+                            android:layout_height="200dp"
+                            android:columnWidth="100dp"
+                            android:gravity="center"
+                            android:horizontalSpacing="1dp"
+                            android:numColumns="10"
+                            android:scrollbarAlwaysDrawHorizontalTrack="true"
+                            android:scrollbarAlwaysDrawVerticalTrack="true"
+                            android:scrollbars="horizontal"
+                            android:stretchMode="none"
+                            android:verticalSpacing="1dp" />
+
+
+                    </LinearLayout>
+                </FrameLayout>
+            </HorizontalScrollView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/mountain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/times_new_roman"
+                    android:text="Mountain"
+                    android:textColor="#fff"
+                    android:textSize="20sp"
+                    android:textStyle="normal" />
+            </RelativeLayout>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent">
+
+
+                    <LinearLayout
+                        android:id="@+id/grideMountain"
+                        android:layout_width="1005dp"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <GridView
+                            android:id="@+id/gridViewCollection"
+                            android:layout_width="fill_parent"
+                            android:layout_height="200dp"
+                            android:columnWidth="100dp"
+                            android:gravity="center"
+                            android:horizontalSpacing="1dp"
+                            android:numColumns="10"
+                            android:scrollbarAlwaysDrawHorizontalTrack="true"
+                            android:scrollbarAlwaysDrawVerticalTrack="true"
+                            android:scrollbars="horizontal"
+                            android:stretchMode="none"
+                            android:verticalSpacing="1dp" />
+                    </LinearLayout>
+                </FrameLayout>
+            </HorizontalScrollView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/entertainment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/times_new_roman"
+                    android:text="Entertainment"
+                    android:textColor="#fff"
+                    android:textSize="20sp"
+                    android:textStyle="normal" />
+            </RelativeLayout>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent">
+
+
+                    <LinearLayout
+                        android:id="@+id/grideEntertainment"
+                        android:layout_width="1005dp"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+
+                        <GridView
+                            android:id="@+id/gridViewEntertainment"
+                            android:layout_width="fill_parent"
+                            android:layout_height="200dp"
+                            android:columnWidth="100dp"
+                            android:gravity="center"
+                            android:horizontalSpacing="1dp"
+                            android:numColumns="10"
+                            android:scrollbarAlwaysDrawHorizontalTrack="true"
+                            android:scrollbarAlwaysDrawVerticalTrack="true"
+                            android:scrollbars="horizontal"
+                            android:stretchMode="none"
+                            android:verticalSpacing="1dp" />
+
+                    </LinearLayout>
+                </FrameLayout>
+            </HorizontalScrollView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/travel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/times_new_roman"
+                    android:text="Travel"
+                    android:textColor="#fff"
+                    android:textSize="20sp"
+                    android:textStyle="normal" />
+            </RelativeLayout>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent">
+
+
+                    <LinearLayout
+                        android:id="@+id/grideTravel"
+                        android:layout_width="1005dp"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+
+                        <GridView
+                            android:id="@+id/gridViewTravel"
+                            android:layout_width="fill_parent"
+                            android:layout_height="200dp"
+                            android:columnWidth="100dp"
+                            android:gravity="center"
+                            android:horizontalSpacing="1dp"
+                            android:numColumns="10"
+                            android:scrollbarAlwaysDrawHorizontalTrack="true"
+                            android:scrollbarAlwaysDrawVerticalTrack="true"
+                            android:scrollbars="horizontal"
+                            android:stretchMode="none"
+                            android:verticalSpacing="1dp" />
+
+                    </LinearLayout>
+                </FrameLayout>
+            </HorizontalScrollView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/fashion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/times_new_roman"
+                    android:text="Fashion"
+                    android:textColor="#fff"
+                    android:textSize="20sp"
+                    android:textStyle="normal" />
+            </RelativeLayout>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:id="@+id/gridefashion"
+            android:layout_width="1005dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <GridView
+                android:id="@+id/gridViewFashion"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:columnWidth="100dp"
+                android:gravity="center"
+                android:horizontalSpacing="1dp"
+                android:numColumns="10"
+                android:scrollbarAlwaysDrawHorizontalTrack="true"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:scrollbars="horizontal"
+                android:stretchMode="none"
+                android:verticalSpacing="1dp" />
+        </LinearLayout>
+        </FrameLayout>
+        </HorizontalScrollView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/Amoled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/times_new_roman"
+                android:text="MUSIC"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                android:textStyle="normal" />
+            </RelativeLayout>
+
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:id="@+id/grideAmoled"
+            android:layout_width="1005dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <GridView
+                android:id="@+id/gridViewAmoled"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:columnWidth="100dp"
+                android:gravity="center"
+                android:horizontalSpacing="1dp"
+                android:numColumns="10"
+                android:scrollbarAlwaysDrawHorizontalTrack="true"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:scrollbars="horizontal"
+                android:stretchMode="none"
+                android:verticalSpacing="1dp"/>
+
+        </LinearLayout>
+        </FrameLayout>
+        </HorizontalScrollView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/Science"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/times_new_roman"
+                android:text="BLACK"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                android:textStyle="normal" />
+            </RelativeLayout>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:id="@+id/grideScience"
+            android:layout_width="1005dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <GridView
+                android:id="@+id/gridViewScience"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:columnWidth="100dp"
+                android:gravity="center"
+                android:horizontalSpacing="1dp"
+                android:numColumns="10"
+                android:scrollbarAlwaysDrawHorizontalTrack="true"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:scrollbars="horizontal"
+                android:stretchMode="none"
+                android:verticalSpacing="1dp"/>
+
+        </LinearLayout>
+        </FrameLayout>
+        </HorizontalScrollView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/Religion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/times_new_roman"
+                android:text="Religion"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                android:textStyle="normal" />
+            </RelativeLayout>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:id="@+id/grideReligion"
+            android:layout_width="1005dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <GridView
+                android:id="@+id/gridViewReligion"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:columnWidth="100dp"
+                android:gravity="center"
+                android:horizontalSpacing="1dp"
+                android:numColumns="10"
+                android:scrollbarAlwaysDrawHorizontalTrack="true"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:scrollbars="horizontal"
+                android:stretchMode="none"
+                android:verticalSpacing="1dp" />
+
+        </LinearLayout>
+        </FrameLayout>
+        </HorizontalScrollView>
+
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
+
