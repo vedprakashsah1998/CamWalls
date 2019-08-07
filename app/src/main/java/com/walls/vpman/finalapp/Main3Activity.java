@@ -12,6 +12,8 @@ import androidx.viewpager.widget.ViewPager;
 import android.Manifest;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
+import android.app.Activity;
+import android.app.Dialog;
 import android.app.WallpaperManager;
 import android.content.ContentValues;
 import android.content.DialogInterface;
@@ -19,6 +21,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -26,7 +29,10 @@ import android.provider.MediaStore;
 
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.OvershootInterpolator;
@@ -34,6 +40,7 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,6 +75,8 @@ import java.util.Collections;
 import java.util.List;
 
 
+
+
 public class Main3Activity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -85,7 +94,7 @@ public class Main3Activity extends AppCompatActivity {
     private int pos;
     private String JsonUrl = "https://pixabay.com/api/?key=11708241-4f427f9d829eb00e4ff78f36c&q= &image_type=photo&per_page=150&safesearch=true";
     private FloatingActionButton fab, floatingActionButton, floatingActionButton1, fab1;
-
+RelativeLayout r;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,8 +103,23 @@ public class Main3Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main3);
         toolbar = findViewById(R.id.header2);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+        r=findViewById(R.id.Rlt);
         fab1 = findViewById(R.id.fab071);
+
+       // View view=findViewById(R.id.content).getRootView();
+
+        /*final Activity activity = new Activity();
+        final View content = findViewById(R.id.content).getRootView();
+      //  Window window=activity.getWindow();
+        if (content.getWidth() > 0) {
+            Bitmap image = BlurBuilder.blur(content);
+            getWindow().setBackgroundDrawable(new BitmapDrawable(getResources(), image));
+        } else {
+            content.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+                Bitmap image = BlurBuilder.blur(content);
+                getWindow().setBackgroundDrawable(new BitmapDrawable(getResources(), image));
+            });
+        }*/
 
         ImageView back4 = findViewById(R.id.back4);
         textView = findViewById(R.id.tvshare1);
@@ -161,19 +185,38 @@ public class Main3Activity extends AppCompatActivity {
 
 
         fab = findViewById(R.id.fab1);
+      /*  AlphaAnimation fadeIn = new AlphaAnimation(1.0f , 0.0f ) ;
+        AlphaAnimation fadeOut = new AlphaAnimation( 0.0f , 1.0f ) ;
+        fab.startAnimation(fadeIn);
+        fab.startAnimation(fadeOut);
+        fadeIn.setDuration(1000);
+        fadeIn.setFillAfter(true);
+        fadeOut.setDuration(1000);
+        fadeOut.setFillAfter(true);
+        fadeOut.setStartOffset(2200+fadeIn.getStartOffset());*/
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                animationfab();
+               // animationfab();
+
+
+              /*  final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) Main3Activity.this
+                        .findViewById(android.R.id.content)).getChildAt(0);
+                Blurry.with(Main3Activity.this).radius(10)
+                        .sampling(8)
+                        .color(Color.argb(66, 255, 255, 0))
+                        .async().onto(viewGroup);*/
+                showDialog(Main3Activity.this);
             }
         });
 
-        fab1.setOnClickListener(new View.OnClickListener() {
+      /*  fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                animationfab1();
+                //animationfab1();
             }
-        });
+        });*/
 
 
         floatingActionButton = findViewById(R.id.wallpaper1);
@@ -283,9 +326,7 @@ public class Main3Activity extends AppCompatActivity {
     private void animationfab() {
 
         if (isOpen) {
-           /* OvershootInterpolator interpolator=new OvershootInterpolator();
-            ViewCompat.animate(fab).rotation(360f).withLayer().setDuration(2000).setInterpolator(interpolator).start();
-    */        // fab.startAnimation(rotateForward);
+
             floatingActionButton.startAnimation(fabClose);
             floatingActionButton1.startAnimation(fabClose);
             textView.setVisibility(View.GONE);
@@ -298,8 +339,7 @@ public class Main3Activity extends AppCompatActivity {
         } else {
             floatingActionButton.startAnimation(fabOpen);
             floatingActionButton1.startAnimation(fabOpen);
-           /* OvershootInterpolator interpolator=new OvershootInterpolator();
-            ViewCompat.animate(fab).rotation(180f).withLayer().setDuration(2000).setInterpolator(interpolator).start();*/
+
             floatingActionButton.show();
             floatingActionButton1.show();
             textView.setVisibility(View.VISIBLE);
@@ -468,6 +508,136 @@ public class Main3Activity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    public void showDialog(Activity activity)
+    {
+        final Dialog dialog = new Dialog(activity, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.set_wall_design);
+        FloatingActionButton downFab=dialog.findViewById(R.id.downFab);
+        downFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+        FloatingActionButton designShare=dialog.findViewById(R.id.designShare);
+        designShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean granted=checkWriteExternalPermission();
+                if (granted==true)
+                {
+                  /*  ProgressBar progressBar=view.findViewById(R.id.progress6);
+                    progressBar.setVisibility(View.VISIBLE);*/
+
+                    Glide.with(Main3Activity.this).asBitmap()
+                            .load(img)
+                            .into(new SimpleTarget<Bitmap>() {
+                                @Override
+                                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition)
+                                {
+                                    // Toast.makeText(getActivity(),"1",Toast.LENGTH_LONG).show();
+
+                                    Intent share = new Intent(Intent.ACTION_SEND);
+                                    share.setType("image/jpeg");
+
+                                    ContentValues values = new ContentValues();
+                                    values.put(MediaStore.Images.Media.TITLE, "title");
+                                    values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+                                    Uri uri = Main3Activity.this.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                                            values);
+                                    OutputStream outstream;
+                                    try {
+                                        outstream = Main3Activity.this.getContentResolver().openOutputStream(uri);
+                                        resource.compress(Bitmap.CompressFormat.JPEG, 100, outstream);
+                                        outstream.close();
+                                    } catch (Exception e) {
+                                        System.err.println(e.toString());
+                                    }
+
+                                    share.putExtra(Intent.EXTRA_STREAM, uri);
+                                    share.setType("text/plain");
+                                    share.putExtra(Intent.EXTRA_SUBJECT, "Cam Walls");
+                                    String shareMessage= "\nDownload this application from PlayStore\n\n";
+                                    shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=com.walls.vpman.finalapp";
+                                    share.putExtra(Intent.EXTRA_TEXT, "Cam Walls"+shareMessage);
+                                    startActivity(Intent.createChooser(share, "Share Image"));
+                                    // ProgressBar progressBar=view.findViewById(R.id.progress6);
+                                    /* progressBar.setVisibility(View.GONE);*/
+                                }
+                            });
+                }
+                else
+                {
+                    Toast.makeText(Main3Activity.this,"2",Toast.LENGTH_LONG).show();
+                    requestStoragePermission();
+                }
+
+
+
+            }
+        });
+
+        FloatingActionButton designWall=dialog.findViewById(R.id.designWallpaper);
+        designWall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final LoadToast lt = new LoadToast(Main3Activity.this);
+                lt.setText("Setting...");
+                lt.setTranslationY(1000);
+                lt.setBorderColor(Color.BLACK);
+                lt.setBackgroundColor(Color.BLUE);
+                lt.setBorderWidthDp(4);
+
+                lt.show();
+
+                Glide.with(Main3Activity.this).asBitmap().load(img).into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+
+                        Intent share = new Intent(Intent.ACTION_SEND);
+                        share.setType("image/jpeg");
+                        String shareMessage = "\nCam Walls\nDownload the application For awesome wallpapers.\n";
+                        shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n";
+                        share.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                        ContentValues values = new ContentValues();
+                        values.put(MediaStore.Images.Media.TITLE, "title");
+                        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+                        Uri uri = Main3Activity.this.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                                values);
+                        OutputStream outstream;
+                        try {
+                            outstream = Main3Activity.this.getContentResolver().openOutputStream(uri);
+                            resource.compress(Bitmap.CompressFormat.JPEG, 100, outstream);
+                            outstream.close();
+                        } catch (Exception e) {
+                            System.err.println(e.toString());
+                        }
+                        WallpaperManager wallpaperManager = WallpaperManager.getInstance(Main3Activity.this);
+                        startActivity(wallpaperManager.getCropAndSetWallpaperIntent(uri));
+                        lt.success();
+                      /*  try {
+
+
+                            WallpaperManager.getInstance(getActivity()).setBitmap(resource);
+                            lt.success();
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }*/
+                    }
+                });
+
+            }
+        });
 
     }
 

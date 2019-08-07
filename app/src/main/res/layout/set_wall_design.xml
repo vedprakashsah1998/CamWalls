@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#A6FDFCFC"
+     android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/downFab"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_gravity="bottom"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:backgroundTint="#000"
+        app:srcCompat="@drawable/down"
+        app:tint="#fff"
+        app:elevation="8dp"
+        app:borderWidth="0dp"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/designShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/downFab"
+        android:clickable="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        app:srcCompat="@drawable/ic_share_black_24dp"
+        app:tint="#fff"
+        app:borderWidth="0dp"
+        app:fabSize="mini"
+        app:backgroundTint="#000"
+        android:focusable="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Share"
+        android:padding="6dp"
+        android:layout_margin="16dp"
+        android:layout_above="@+id/downFab"
+        android:layout_toStartOf="@+id/designShare"
+        android:id="@+id/tvshare"
+        android:textColor="#fff"
+        android:background="#000"
+
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/designWallpaper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/designShare"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        android:layout_alignParentEnd="true"
+        android:clickable="true"
+        android:layout_marginEnd="16dp"
+        app:tint="#fff"
+        android:layout_marginBottom="8dp"
+        app:backgroundTint="#000"
+        app:srcCompat="@drawable/ic_wallpaper"
+        app:borderWidth="0dp"
+        app:fabSize="mini"
+        android:focusable="true" />
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Wallpaper"
+        android:padding="6dp"
+        android:layout_margin="16dp"
+        android:layout_above="@+id/designShare"
+        android:layout_toStartOf="@+id/designWallpaper"
+        android:id="@+id/tvwall"
+        android:textColor="#fff"
+        android:background="#000"
+
+        />
+
+</RelativeLayout>

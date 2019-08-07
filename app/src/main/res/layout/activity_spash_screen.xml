@@ -13,6 +13,7 @@
         android:text="Cam Walls"
         android:textColor="#ffffff"
         android:gravity="center"
+        android:id="@+id/CamWalls007"
         android:layout_centerHorizontal="true"
         android:layout_above="@id/logo"
         android:textSize="30sp"

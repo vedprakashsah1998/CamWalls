@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:id="@+id/listPhoto007"
+    android:layout_height="wrap_content">
 
 <ProgressBar
     android:layout_width="wrap_content"
@@ -29,7 +29,7 @@
         android:scaleType="centerCrop"
         android:elevation="8dp"
         android:outlineProvider="paddedBounds"
-        android:background="@drawable/grideimg"
+        android:adjustViewBounds="true"
         tools:srcCompat="@tools:sample/backgrounds/scenic"/>
 <!--
     </androidx.cardview.widget.CardView>

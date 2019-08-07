@@ -20,11 +20,10 @@ public class SliderAdapter extends PagerAdapter
     public int[]  images = {
             R.drawable.swipeup,
             R.drawable.swipedown,
-            R.drawable.tap
     };
 
     public String[] title={
-            "Swipe Up","Swipe Down","Single Tap"
+            "Swipe Up","Swipe Down"
     };
 
     public SliderAdapter(Context context) {

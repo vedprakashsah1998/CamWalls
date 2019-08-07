@@ -3,4 +3,6 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="Upload">Upload</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>

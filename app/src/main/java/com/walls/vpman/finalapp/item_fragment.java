@@ -2,6 +2,8 @@ package com.walls.vpman.finalapp;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.Dialog;
 import android.app.WallpaperManager;
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,6 +12,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -18,28 +21,29 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.GestureDetector;
-import android.view.KeyEvent;
+
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.OvershootInterpolator;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
-import android.widget.EditText;
+
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ViewFlipper;
 
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.RetryPolicy;
 import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
@@ -51,48 +55,65 @@ import com.bumptech.glide.request.transition.Transition;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import com.google.firebase.database.DatabaseReference;
+import com.walls.vpman.finalapp.Model.WallArray;
+import com.walls.vpman.finalapp.Model.WallList;
+
 import net.steamcrafted.loadtoast.LoadToast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.IOException;
+
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import androidx.appcompat.app.AlertDialog;
+
 import androidx.appcompat.widget.ShareActionProvider;
+
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import retrofit2.Call;
+import retrofit2.Callback;
 
-public class item_fragment<sttaic, editText> extends Fragment {
+
+public class item_fragment extends Fragment {
 
     View view;
-    ImageView imageView;
 
-    VerticalViewPageAdapter verticalViewPageAdapter;
 
- //   EditText editText;
+VerticalViewPageAdapter verticalViewPageAdapter;
 
-    static String query;
+
 
     int check=0;
 
+    private ArrayList<WallList> data;
+
     List<String> finalwall = new ArrayList<>();
     List<String> slides = new ArrayList<>();
+
+
+    List<String> Name = new ArrayList<>();
+    List<String> slides1 = new ArrayList<>();
+    List<String> urlPhotographeer = new ArrayList<>();
+    List<String> user = new ArrayList<>();
+
     private static int splash = 200;
     //private String img;
-    GestureDetector gestureDetector;
     String setWall = null;
+    String photoName = null;
+    String photoUrl = null;
     private Bitmap bitmap;
     private List<String> walList=new ArrayList<>();
     SliderAdapter1 adapter1;
@@ -104,14 +125,22 @@ public class item_fragment<sttaic, editText> extends Fragment {
 
     TextView share1,wally;
 
+    Button favourite;
+
     String TAG;
+
+
 
     FloatingActionButton fab,floatingActionButton,floatingActionButton1,fab1;
     private int STORAGE_PERMISSION_CODE = 1;
 
-    private String JsonUrl = "https://pixabay.com/api/?key=11708241-4f427f9d829eb00e4ff78f36c&q= &image_type=photo&per_page=100&safesearch=true";
+    public static final String API_KEY="11708241-4f427f9d829eb00e4ff78f36c";
 
+    private String JsonUrl = "https://pixabay.com/api/?key=11708241-4f427f9d829eb00e4ff78f36c&q= &image_type=photo&per_page=100&safesearch=true";
+private String Url="https://api.pexels.com/v1/curated?query=flower&per_page=80&page=10";
     private List<Wall> walls = new ArrayList<>();
+
+    DatabaseReference databaseReference;
 
     @SuppressLint("ClickableViewAccessibility")
     @Nullable
@@ -119,17 +148,38 @@ public class item_fragment<sttaic, editText> extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.item_photo, container, false);
 
-     //   Toast.makeText(getActivity(), "Ved Prakash", Toast.LENGTH_LONG).show();
-
-      //  editText = view.findViewById(R.id.edit_search);
+      /*  final Activity activity = getActivity();
+        final View content = activity.findViewById(android.R.id.content).getRootView();
+        Window window=activity.getWindow();
+        if (content.getWidth() > 0) {
+            Bitmap image = BlurBuilder.blur(content);
+            window.setBackgroundDrawable(new BitmapDrawable(activity.getResources(), image));
+        } else {
+            content.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+                Bitmap image = BlurBuilder.blur(content);
+                window.setBackgroundDrawable(new BitmapDrawable(activity.getResources(), image));
+            });
+        }*/
         share1=view.findViewById(R.id.tvshare);
         wally=view.findViewById(R.id.tvwall);
-        verticalViewPageAdapter=view.findViewById(R.id.imgFull07);
+      //  favourite=view.findViewById(R.id.favourite);
+
+        fab=view.findViewById(R.id.fab);
+        fab1=view.findViewById(R.id.fab07);
+
+        floatingActionButton = view.findViewById(R.id.wallpaper);
+        floatingActionButton1 = view.findViewById(R.id.share);
+
+
+        verticalViewPageAdapter=view.findViewById(R.id.imgFull007);
+
         verticalViewPageAdapter.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 pos=position;
                 setWall=finalwall.get(pos);
+               /* photoName=Name.get(pos);
+                photoUrl=user.get(pos);*/
             }
 
             @Override
@@ -142,7 +192,9 @@ public class item_fragment<sttaic, editText> extends Fragment {
 
             }
         });
-        fab1=view.findViewById(R.id.fab07);
+
+
+
 
 
 
@@ -165,143 +217,18 @@ public class item_fragment<sttaic, editText> extends Fragment {
 
 
 
-        fabOpen= AnimationUtils.loadAnimation(getActivity(),R.anim.fab_open);
-        fabClose=AnimationUtils.loadAnimation(getActivity(),R.anim.fab_close);
-        rotateForward=AnimationUtils.loadAnimation(getActivity(),R.anim.rotate_forward);
-        rotateBackward=AnimationUtils.loadAnimation(getActivity(),R.anim.rotate_backward);
 
-        fab=view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+
+         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                animationfab();
-            }
-        });
+                //animationfab();
 
-        fab1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                animationfab();
+                showDialog(getActivity());
             }
         });
 
 
-        floatingActionButton = view.findViewById(R.id.wallpaper);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-
-                final LoadToast lt = new LoadToast(getActivity());
-                lt.setText("Setting...");
-                lt.setTranslationY(1000);
-                lt.setBorderColor(Color.BLACK);
-                lt.setBorderWidthDp(4);
-
-                lt.show();
-
-                Glide.with(getActivity()).asBitmap().load(setWall).into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-
-                        Intent share = new Intent(Intent.ACTION_SEND);
-                        share.setType("image/jpeg");
-                        String shareMessage = "\nCam Walls\nDownload the application For awesome wallpapers.\n";
-                        shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n";
-                        share.putExtra(android.content.Intent.EXTRA_TEXT, shareMessage);
-                        ContentValues values = new ContentValues();
-                        values.put(MediaStore.Images.Media.TITLE, "title");
-                        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
-                        Uri uri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                                values);
-                        OutputStream outstream;
-                        try {
-                            outstream = getActivity().getContentResolver().openOutputStream(uri);
-                            resource.compress(Bitmap.CompressFormat.JPEG, 100, outstream);
-                            outstream.close();
-                        } catch (Exception e) {
-                            System.err.println(e.toString());
-                        }
-                        WallpaperManager wallpaperManager = WallpaperManager.getInstance(getActivity());
-                        startActivity(wallpaperManager.getCropAndSetWallpaperIntent(uri));
-                        verticalViewPageAdapter.setCurrentItem(pos);
-                        lt.success();
-                      /*  try {
-
-
-                            WallpaperManager.getInstance(getActivity()).setBitmap(resource);
-                            lt.success();
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }*/
-                    }
-                });
-
-
-
-            }
-        });
-
-
-        floatingActionButton1 = view.findViewById(R.id.share);
-
-        floatingActionButton1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean granted=checkWriteExternalPermission();
-                if (granted==true)
-                {
-                  /*  ProgressBar progressBar=view.findViewById(R.id.progress6);
-                    progressBar.setVisibility(View.VISIBLE);*/
-
-                    Glide.with(getActivity()).asBitmap()
-                            .load(setWall)
-                            .into(new SimpleTarget<Bitmap>() {
-                                @Override
-                                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition)
-                                {
-                                   // Toast.makeText(getActivity(),"1",Toast.LENGTH_LONG).show();
-
-                                    Intent share = new Intent(Intent.ACTION_SEND);
-                                    share.setType("image/jpeg");
-
-                                    ContentValues values = new ContentValues();
-                                    values.put(MediaStore.Images.Media.TITLE, "title");
-                                    values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
-                                    Uri uri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                                            values);
-                                    OutputStream outstream;
-                                    try {
-                                        outstream = getActivity().getContentResolver().openOutputStream(uri);
-                                        resource.compress(Bitmap.CompressFormat.JPEG, 100, outstream);
-                                        outstream.close();
-                                    } catch (Exception e) {
-                                        System.err.println(e.toString());
-                                    }
-
-                                    share.putExtra(Intent.EXTRA_STREAM, uri);
-                                    share.setType("text/plain");
-                                    share.putExtra(Intent.EXTRA_SUBJECT, "Cam Walls");
-                                    String shareMessage= "\nDownload this application from PlayStore\n\n";
-                                    shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=com.walls.vpman.finalapp";
-                                    share.putExtra(Intent.EXTRA_TEXT, "Cam Walls"+shareMessage);
-                                    startActivity(Intent.createChooser(share, "Share Image"));
-                                   // ProgressBar progressBar=view.findViewById(R.id.progress6);
-                                   /* progressBar.setVisibility(View.GONE);*/
-                                }
-                            });
-                }
-                else
-                {
-                    Toast.makeText(getActivity(),"2",Toast.LENGTH_LONG).show();
-                    requestStoragePermission();
-                }
-
-
-            }
-        });
 
 
 
@@ -336,10 +263,16 @@ public class item_fragment<sttaic, editText> extends Fragment {
                 // final ImageView view=findViewById(R.id.imgView);
              //   imageView = view.findViewById(R.id.imgView1);
 
-                verticalViewPageAdapter=view.findViewById(R.id.imgFull07);
+                verticalViewPageAdapter=view.findViewById(R.id.imgFull007);
 
-                walls = new ArrayList<>();
-                slides=new ArrayList<>();
+              //  verticalViewPageAdapter.setScrollDurationFactor(0.1f);
+
+                verticalViewPageAdapter.setOverScrollMode(View.OVER_SCROLL_NEVER);
+
+
+                slides=new ArrayList<>();/*
+                slides1=new ArrayList<>();
+                urlPhotographeer=new ArrayList<>();*/
                 adapter1 = new SliderAdapter1(getActivity(), slides);
                // final ViewPager view = view.findViewById(R.id.imgFull);
                 verticalViewPageAdapter.setAdapter(adapter1);
@@ -351,8 +284,49 @@ public class item_fragment<sttaic, editText> extends Fragment {
                             public void onResponse(String response) {
 
                                 try {
+                                  /*  JSONObject obj = new JSONObject(response);
+                                    //  Log.d("mil gaya",String.valueOf(obj));
+                                    JSONArray wallArray = obj.getJSONArray("photos");
+                                    for (int i = 0; i < wallArray.length(); i++)
+                                    {
+                                        JSONObject wallobj=wallArray.getJSONObject(i);
+                                        JSONObject photographer=new JSONObject(String.valueOf(wallobj));
+                                        JSONObject ProfileUrl=new JSONObject(String.valueOf(wallobj));
+                                        JSONObject jsonObject=wallobj.getJSONObject("src");
+                                        JSONObject object=new JSONObject(String.valueOf(jsonObject));
+                                     //   Log.d("milGaya", String.valueOf(photographer));
+                                        slides.add(object.getString("large2x"));
+                                        slides1.add(photographer.getString("photographer"));
+                                        urlPhotographeer.add(ProfileUrl.getString("url"));
+
+                                    }
+
+                                    if (check==0)
+                                    {
+                                        Collections.shuffle(slides);
+                                        Collections.shuffle(slides1);
+                                        Collections.shuffle(urlPhotographeer);
+                                        check=1;
+                                        Name=slides1;
+                                        user=urlPhotographeer;
+                                        finalwall=slides;
+                                        adapter1 = new SliderAdapter2(getActivity(), slides);
+                                    }
+                                    else
+                                    {
+                                        adapter1 = new SliderAdapter2(getActivity(), finalwall);
+                                    }
+
+
+
+
+                                    verticalViewPageAdapter.setAdapter(adapter1);
+                                    verticalViewPageAdapter.setCurrentItem(pos);
+                                    setWall=finalwall.get(pos);
+                                    photoName=Name.get(pos);
+                                    photoUrl=user.get(pos);*/
                                     JSONObject obj = new JSONObject(response);
-                                       Log.e("mil gaya",String.valueOf(obj));
+                                    Log.d("mila", String.valueOf(obj));
                                     JSONArray wallArray = obj.getJSONArray("hits");
                                     for (int i = 0; i < wallArray.length(); i++)
                                     {
@@ -418,9 +392,11 @@ public class item_fragment<sttaic, editText> extends Fragment {
                             }
                         });
 
-                RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-                requestQueue.add(stringRequest);
 
+                RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+                stringRequest.setRetryPolicy(new DefaultRetryPolicy(3000,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                requestQueue.add(stringRequest);
 
 
             }
@@ -430,39 +406,7 @@ public class item_fragment<sttaic, editText> extends Fragment {
 
     }
 
-    private void animationfab()
-    {
 
-        if (isOpen)
-        {
-          /*  OvershootInterpolator interpolator=new OvershootInterpolator();
-            ViewCompat.animate(fab).rotation(360f).withLayer().setDuration(2000).setInterpolator(interpolator).start();*/
-
-          fab1.hide();
-          floatingActionButton.hide();
-          floatingActionButton1.hide();
-            floatingActionButton.setClickable(false);
-            floatingActionButton1.setClickable(false);
-            share1.setVisibility(View.GONE);
-            wally.setVisibility(View.GONE);
-            isOpen = false;
-        }
-        else
-        {
-
-          /*  OvershootInterpolator interpolator=new OvershootInterpolator();
-            ViewCompat.animate(fab).rotation(180f).withLayer().setDuration(2000).setInterpolator(interpolator).start();*/
-            floatingActionButton.show();
-            fab1.show();
-            floatingActionButton1.show();
-            share1.setVisibility(View.VISIBLE);
-            wally.setVisibility(View.VISIBLE);
-            floatingActionButton.setClickable(true);
-            floatingActionButton1.setClickable(true);
-            isOpen = true;
-        }
-
-    }
 
 
     private void requestStoragePermission() {
@@ -542,7 +486,8 @@ public class item_fragment<sttaic, editText> extends Fragment {
             Button button = getActivity().findViewById(R.id.material_button);
             button.setVisibility(View.GONE);
             //Toast.makeText(getActivity(),"connected",Toast.LENGTH_SHORT).show();
-            loadWall();
+           loadWall();
+            //LoadJSon();
         } else {
             Toast.makeText(getActivity(), "No Internet", Toast.LENGTH_SHORT).show();
             ImageView imageView = getActivity().findViewById(R.id.nointernet);
@@ -564,4 +509,207 @@ public class item_fragment<sttaic, editText> extends Fragment {
 
         super.onStart();
     }
+
+public void LoadJSon()
+{
+    String image_type="photo";
+    int per_page=100;
+    Boolean safesearch=true;
+    JsonPlaceHolderApi jsonPlaceHolderApi=ApiClient.getApiClient().create(JsonPlaceHolderApi.class);
+
+    Call<WallArray> wallCall=jsonPlaceHolderApi.getWall(API_KEY,image_type,"",per_page,safesearch);
+    wallCall.enqueue(new Callback<WallArray>() {
+        @Override
+        public void onResponse(Call<WallArray> call, retrofit2.Response<WallArray> response) {
+
+          /*  if (response.isSuccessful()&&response.body().getOriginal()!=null)
+            {*/
+
+          WallArray wallArray=response.body();
+         // data=new ArrayList<>(Arrays.asList(wallArray.getWallLists()));
+                slides=new ArrayList<>();
+
+              /*  if (!slides.isEmpty())
+                {
+                    slides.clear();
+                }*/
+              // slides=response.body().getOriginal();
+
+             //   walls=response.body().getOriginal();
+                verticalViewPageAdapter=view.findViewById(R.id.imgFull007);
+
+             /*   adapter1 = new SliderAdapter1(getActivity(), slides);
+               // verticalViewPageAdapter.setAdapter(adapter1);
+
+                if (check==0)
+                {
+                    Collections.shuffle(slides);
+                    check=1;
+                    finalwall=slides;
+                    adapter1 = new SliderAdapter1(getActivity(), slides);
+                    adapter1.notifyDataSetChanged();
+                }
+                else
+                {
+                    adapter1 = new SliderAdapter1(getActivity(), finalwall);
+                    adapter1.notifyDataSetChanged();
+                }*/
+
+
+
+
+                verticalViewPageAdapter.setAdapter(adapter1);
+                verticalViewPageAdapter.setCurrentItem(pos);
+                setWall=finalwall.get(pos);
+
+          //  }
+
+        }
+
+        @Override
+        public void onFailure(Call<WallArray> call, Throwable t) {
+
+        }
+    });
+
+}
+
+
+    public void showDialog(Activity activity)
+    {
+        final Dialog dialog = new Dialog(activity, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.set_wall_design);
+        FloatingActionButton downFab=dialog.findViewById(R.id.downFab);
+        downFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+        /*TextView PhotoGrapherName=dialog.findViewById(R.id.photoGrapher);
+        PhotoGrapherName.setText("photo by: "+photoName);
+
+        Toast.makeText(activity,photoUrl,Toast.LENGTH_LONG).show();
+        Log.d("url",photoUrl);
+
+        PhotoGrapherName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, WebActivity.class);
+                intent.putExtra("url",photoUrl);
+                activity.startActivity(intent);
+            }
+        });*/
+
+        FloatingActionButton designShare=dialog.findViewById(R.id.designShare);
+        designShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean granted=checkWriteExternalPermission();
+                if (granted==true)
+                {
+                  /*  ProgressBar progressBar=view.findViewById(R.id.progress6);
+                    progressBar.setVisibility(View.VISIBLE);*/
+
+                    Glide.with(getActivity()).asBitmap()
+                            .load(setWall)
+                            .into(new SimpleTarget<Bitmap>() {
+                                @Override
+                                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition)
+                                {
+                                    // Toast.makeText(getActivity(),"1",Toast.LENGTH_LONG).show();
+
+                                    Intent share = new Intent(Intent.ACTION_SEND);
+                                    share.setType("image/jpeg");
+
+                                    ContentValues values = new ContentValues();
+                                    values.put(MediaStore.Images.Media.TITLE, "title");
+                                    values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+                                    Uri uri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                                            values);
+                                    OutputStream outstream;
+                                    try {
+                                        outstream = getActivity().getContentResolver().openOutputStream(uri);
+                                        resource.compress(Bitmap.CompressFormat.JPEG, 100, outstream);
+                                        outstream.close();
+                                    } catch (Exception e) {
+                                        System.err.println(e.toString());
+                                    }
+
+                                    share.putExtra(Intent.EXTRA_STREAM, uri);
+                                    share.setType("text/plain");
+                                    share.putExtra(Intent.EXTRA_SUBJECT, "Cam Walls");
+                                    String shareMessage= "\nDownload this application from PlayStore\n\n";
+                                    shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=com.walls.vpman.finalapp";
+                                    share.putExtra(Intent.EXTRA_TEXT, "Cam Walls"+shareMessage);
+                                    startActivity(Intent.createChooser(share, "Share Image"));
+                                    // ProgressBar progressBar=view.findViewById(R.id.progress6);
+                                    /* progressBar.setVisibility(View.GONE);*/
+                                }
+                            });
+                }
+                else
+                {
+                    Toast.makeText(getActivity(),"2",Toast.LENGTH_LONG).show();
+                    requestStoragePermission();
+                }
+
+
+
+            }
+        });
+
+        FloatingActionButton designWall=dialog.findViewById(R.id.designWallpaper);
+        designWall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final LoadToast lt = new LoadToast(getActivity());
+                lt.setText("Setting...");
+                lt.setTranslationY(1000);
+                lt.setBorderColor(Color.BLACK);
+                lt.setBackgroundColor(Color.BLUE);
+                lt.setBorderWidthDp(4);
+
+                lt.show();
+
+                Glide.with(getActivity()).asBitmap().load(setWall).into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+
+                        Intent share = new Intent(Intent.ACTION_SEND);
+                        share.setType("image/jpeg");
+                        String shareMessage = "\nCam Walls\nDownload the application For awesome wallpapers.\n";
+                        shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n";
+                        share.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                        ContentValues values = new ContentValues();
+                        values.put(MediaStore.Images.Media.TITLE, "title");
+                        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+                        Uri uri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                                values);
+                        OutputStream outstream;
+                        try {
+                            outstream = getActivity().getContentResolver().openOutputStream(uri);
+                            resource.compress(Bitmap.CompressFormat.JPEG, 100, outstream);
+                            outstream.close();
+                        } catch (Exception e) {
+                            System.err.println(e.toString());
+                        }
+                        WallpaperManager wallpaperManager = WallpaperManager.getInstance(getActivity());
+                        startActivity(wallpaperManager.getCropAndSetWallpaperIntent(uri));
+                        verticalViewPageAdapter.setCurrentItem(pos);
+                        lt.success();
+
+                    }
+                });
+
+            }
+        });
+
+    }
+
 }

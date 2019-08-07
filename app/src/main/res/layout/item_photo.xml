@@ -7,60 +7,14 @@
     android:focusableInTouchMode="true">
 
 
-<!--
-    <androidx.viewpager.widget.ViewPager
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/imgFull"/>-->
-
     <com.walls.vpman.finalapp.VerticalViewPageAdapter
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="false"
-        android:id="@+id/imgFull07"/>
-
-   <!-- <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/imgView1"
-        android:scaleType="centerCrop"/>-->
-
-<!--<ProgressBar
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_centerInParent="true"
-    android:id="@+id/progress6"
-    android:theme="@style/mypb"
-    android:visibility="gone"/>-->
+        android:id="@+id/imgFull007"/>
 
 
-<!--
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/edit_search"
 
-        android:layout_centerVertical="true"
-        android:theme="@style/mypb"
-        android:padding="6dp"
-        android:visibility="gone"
-        android:id="@+id/progress"/>-->
-<!--
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_margin="16dp"
-        android:layout_height="50dp"
-        android:hint="Search Free Photo"
-        android:textColorHint="#070707"
-        android:paddingLeft="8dp"
-        android:textColor="#0C0C0C"
-        android:background="@drawable/edit_text"
-        android:layout_centerInParent="true"
-        android:id="@+id/edit_search"
-        android:imeOptions="actionSearch"
-        android:inputType="text"
-        android:textCursorDrawable="@drawable/cursor_editext"
-        android:drawableRight="@drawable/ic_search_black_24dp"/>-->
 
 
     <ImageView
@@ -109,8 +63,10 @@
         app:srcCompat="@drawable/up"
         app:tint="#fff"
         app:borderWidth="0dp"
+        android:visibility="visible"
         app:elevation="20dp"
-        android:clickable="true" />
+        android:clickable="true"
+        android:focusable="true" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab07"
@@ -126,8 +82,9 @@
         app:srcCompat="@drawable/down"
         app:tint="#fff"
         app:elevation="20dp"
+        android:visibility="gone"
         app:borderWidth="0dp"
-        android:clickable="true" />
+        android:clickable="true"/>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -197,6 +154,15 @@
 
         />
 
+  <!--  <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Favourite"
+        android:id="@+id/favourite"
+        android:textSize="20sp"
+        android:layout_centerInParent="true"
+        />
+-->
 
 
 

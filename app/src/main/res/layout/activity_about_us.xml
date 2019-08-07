@@ -20,11 +20,11 @@
 
         <ImageView
             android:id="@+id/back1"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
-            android:src="@drawable/ic_chevron_left_black_24dp" />
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_back"/>
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv1"
             android:layout_width="200dp"
             android:layout_height="44dp"
@@ -71,7 +71,7 @@
         </RelativeLayout>
 
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
@@ -86,7 +86,7 @@
 
 
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/aboutUs1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                 android:textColor="#000"
                 android:textSize="15sp" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/aboutDeveloper"
                 android:layout_width="250dp"
                 android:layout_height="30dp"
@@ -127,7 +127,7 @@
                         android:layout_height="50dp"
                         android:src="@drawable/instagram" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/instagram2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -149,7 +149,7 @@
                         android:layout_height="50dp"
                         android:src="@drawable/facebook1" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/facebook2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -171,7 +171,7 @@
                         android:layout_height="50dp"
                         android:src="@drawable/mail" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/mail1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -196,7 +196,7 @@
                         android:layout_height="50dp"
                         android:src="@drawable/linkedin" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/linkedin1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -210,7 +210,7 @@
 
 
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/aboutDesigner"
                 android:layout_width="350dp"
                 android:layout_height="30dp"
@@ -263,7 +263,7 @@
 
                         android:src="@drawable/facebook1" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/facebook3"
@@ -275,7 +275,7 @@
             </LinearLayout>
 
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/aboutApi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -311,7 +311,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:gravity="center">
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
@@ -323,7 +323,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:gravity="center">
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"

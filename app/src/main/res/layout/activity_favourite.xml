@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    tools:context=".Favourite">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/favouriteHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#070707"
+        android:minHeight="?attr/actionBarSize"
+        app:popupTheme="@style/ToolbarTheme1"
+        android:elevation="5dp"
+        app:titleTextColor="#FDFCFC"
+        app:titleTextAppearance="@style/Toolbar.TitleText">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:id="@+id/favouriteBack"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/back"/>
+
+        <TextView
+            android:id="@+id/tvFav"
+            android:layout_width="200dp"
+            android:layout_height="44dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Favourite"
+            android:fontFamily="@string/fui_welcome_back_idp_header"
+            android:layout_marginStart="20dp"
+            android:textColor="#ffffff"
+            android:textSize="30sp"
+            android:textStyle="normal" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/gridView"
+        android:numColumns="3"
+        android:layout_below="@+id/favouriteHeader"
+        android:verticalSpacing="2dp"
+        android:horizontalSpacing="2dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center"/>
+
+</RelativeLayout>

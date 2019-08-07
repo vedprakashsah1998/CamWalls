@@ -13,7 +13,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +30,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -41,7 +45,10 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import de.hdodenhof.circleimageview.CircleImageView;
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
+{
 
 
     private static int splash = 200;
@@ -54,10 +61,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private SharedPref pref;
     private InterstitialAd interstitialAd;
     private int STORAGE_PERMISSION_CODE = 1;
-
+    NavigationView navigationView;
     boolean doubleBackToExitPressedOnce = false;
+    View headerview;
+    TextView profilename;
 
+    CircleImageView view;
+    Animation fromtop, frombottom;
     SearchView searchView = null;
+
+    Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +84,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawereLayout = findViewById(R.id.Main);
         toolbar = findViewById(R.id.appbar);
         viewPager = findViewById(R.id.view_Pager);
+/*
+        TabLayout tabLayout =  findViewById(R.id.tabDots);
+*/
+        viewPager.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        viewPager.setOffscreenPageLimit(2);
+/*
+        tabLayout.setupWithViewPager(viewPager, true);
+*/
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+
         viewPager.setAdapter(adapter);
         MobileAds.initialize(this, "ca-app-pub-2659801811473026~7642733565");
         interstitialAd = new InterstitialAd(this);
@@ -79,8 +101,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         interstitialAd.loadAd(new AdRequest.Builder().build());
 
 
+        fromtop = AnimationUtils.loadAnimation(this, R.anim.fromtop);
+        frombottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
 
 
+
+
+     /*   for(int i=0; i < tabLayout.getTabCount(); i++) {
+            View tab = ((ViewGroup) tabLayout.getChildAt(0)).getChildAt(i);
+            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) tab.getLayoutParams();
+            p.setMargins(0, 0, 50, 0);
+            tab.requestLayout();
+        }*/
 
 
 
@@ -89,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.
                 LayoutParams.FLAG_FULLSCREEN);
-
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
 
         setSupportActionBar(toolbar);
 
@@ -99,21 +131,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-
-
-
-        drawerToggle = new ActionBarDrawerToggle(this, mDrawereLayout, R.string.open, R.string.close);
-        mDrawereLayout.addDrawerListener(drawerToggle);
-        drawerToggle.syncState();
-
-        final NavigationView navigationView = findViewById(R.id.navigation);
+        navigationView = findViewById(R.id.navigation);
         navigationView.setNavigationItemSelectedListener(this);
 
 
 
-        View headerview = navigationView.getHeaderView(0);
-        TextView profilename =headerview.findViewById(R.id.email);
+        headerview = navigationView.getHeaderView(0);
+        profilename =headerview.findViewById(R.id.email);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        view = headerview.findViewById(R.id.profile);
 
         String skip=null;
         try {
@@ -123,7 +149,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (user != null)
         {
             String email = user.getEmail();
-            ImageView view = headerview.findViewById(R.id.profile);
             Uri img = user.getPhotoUrl();
             Glide.with(this).load(img).into(view);
             profilename.setText(email);
@@ -138,6 +163,44 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 finish();
             }
         }
+
+
+        drawerToggle = new ActionBarDrawerToggle(this, mDrawereLayout, R.string.open, R.string.close);
+        mDrawereLayout.addDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+
+        mDrawereLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+
+
+                profilename.startAnimation(frombottom);
+
+                fromtop.computeDurationHint();
+                frombottom.computeDurationHint();
+                view.startAnimation(fromtop);
+
+
+            }
+
+            @Override
+            public void onDrawerOpened(@NonNull View drawerView) {
+
+
+            }
+
+            @Override
+            public void onDrawerClosed(@NonNull View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
+
+
 
 
 
@@ -165,6 +228,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     }
+
 
 
     @Override
@@ -266,6 +330,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
         }
 
+        /*if (id==R.id.favouriteId)
+        {
+            Intent intent = new Intent(getApplicationContext(), Favourite.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+            item.setChecked(true);
+            mDrawereLayout.closeDrawers();
+        }*/
 
 
         if (id==R.id.share2)
@@ -344,14 +417,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             new AlertDialog.Builder(this)
                     .setTitle("Permission needed")
                     .setMessage("This permission is needed so that you can share the image to your friend")
-                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            ActivityCompat.requestPermissions(MainActivity.this,
-                                    new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
-                        }
-
-                    }).setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    .setPositiveButton("ok", (dialog, which) -> ActivityCompat.requestPermissions(MainActivity.this,
+                            new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE)).setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
@@ -376,10 +443,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+
+
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.dashboard, menu);
+     //   getMenuInflater().inflate(R.menu.nav_menu,menu);
 
+        /*if (menu!=null)
+        {
+            menu.findItem(R.id.home).getActionView().startAnimation(frombottom);
+            menu.findItem(R.id.category).getActionView().startAnimation(frombottom);
+        }*/
+      //  menu_Item.getActionView().startAnimation(frombottom);
+
+       // menu_Item=menu.findItem(R.id.home);
+
+     /*   this.menu = menu;
+            menu.findItem(R.id.home).getActionView().startAnimation(frombottom);*/
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchManager searchManager = (SearchManager) MainActivity.this.getSystemService(Context.SEARCH_SERVICE);
 
@@ -432,4 +513,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar.setTitle("Cam Walls");
         super.onStart();
     }
+
+
+
+
+
 }

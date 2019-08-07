@@ -4,9 +4,12 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -69,26 +72,29 @@ public class Adapter extends BaseAdapter
         ImageView view1=view.findViewById(R.id.imageView);
         final ProgressBar progressBar=view.findViewById(R.id.progress09);
 
-        view1.setClipToOutline(true);
+        Animation fromtop, frombottom;
+
+
+        fromtop = AnimationUtils.loadAnimation(context, R.anim.fromtop);
+        frombottom = AnimationUtils.loadAnimation(context, R.anim.frombottom);
+
+       view1.startAnimation(fromtop);
+
+
 
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL)
                 .signature(new ObjectKey(System.currentTimeMillis())).encodeQuality(70);
-        requestOptions.diskCacheStrategy(DiskCacheStrategy.RESOURCE);
+        requestOptions.priority(Priority.IMMEDIATE);
+        requestOptions.skipMemoryCache(false);
+        requestOptions.onlyRetrieveFromCache(true);
+
+
         requestOptions.diskCacheStrategy(DiskCacheStrategy.AUTOMATIC);
-        requestOptions.diskCacheStrategy(DiskCacheStrategy.DATA);
         requestOptions.placeholder(Utils.getRandomDrawbleColor());
+        requestOptions.centerCrop();
 
-     //   Glide.with(context).load(walls.get(position).getWebformatURL()).into(view1);
 
-       /* Bitmap mbitmap = ((BitmapDrawable) getResources().g.getDrawable(R.drawable.cat)).getBitmap();
-        Bitmap imageRounded = Bitmap.createBitmap(mbitmap.getWidth(), mbitmap.getHeight(), mbitmap.getConfig());
-        Canvas canvas = new Canvas(imageRounded);
-        Paint mpaint = new Paint();
-        mpaint.setAntiAlias(true);
-        mpaint.setShader(new BitmapShader(mbitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
-        canvas.drawRoundRect((new RectF(0, 0, mbitmap.getWidth(), mbitmap.getHeight())), 100, 100, mpaint);// Round Image Corner 100 100 100 100
-        view1.setImageBitmap(imageRounded);*/
 
         RequestOptions requestOptions1=new RequestOptions();
         requestOptions1.diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -100,11 +106,16 @@ public class Adapter extends BaseAdapter
         requestOptions1.diskCacheStrategy(DiskCacheStrategy.AUTOMATIC);
         requestOptions1.diskCacheStrategy(DiskCacheStrategy.DATA);
         requestOptions1.placeholder(Utils.getRandomDrawbleColor());
+        requestOptions1.centerCrop();
+
 
         if (deviceOnWifi()) {
             Glide.with(context).load(walls.get(position)).preload(500,500);
             Glide.with(context)
                     .load(walls.get(position).getWebformatURL())
+                    .thumbnail(
+                            Glide.with(context).load(walls.get(position).getWebformatURL())
+                    )
                     .apply(requestOptions)
                     .listener(new RequestListener<Drawable>() {
                         @Override

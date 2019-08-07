@@ -6,6 +6,12 @@
         android:id="@+id/home"
         android:icon="@drawable/ic_home_black_24dp"
         android:title="Home"/>
+
+        <item
+            android:id="@+id/category"
+            android:icon="@drawable/ic_star"
+            android:title="Category"/>
+
     <item
         android:id="@+id/share2"
         android:icon="@drawable/ic_share1"
@@ -15,16 +21,13 @@
             android:icon="@drawable/log_in"
             android:title="Login"/>
 
-    <item
-        android:id="@+id/category"
-        android:icon="@drawable/ic_star"
-        android:title="Category"/>
 
 
-      <!--  <item
-            android:id="@+id/photography"
-            android:icon="@drawable/ic_camera"
-            android:title="Photography"/>-->
+
+     <!--   <item
+            android:id="@+id/favouriteId"
+            android:icon="@drawable/ic_favorite_border"
+            android:title="Favourite"/>-->
 
 
 
@@ -44,15 +47,18 @@
         android:icon="@drawable/ic_feedback"
         android:title="Feedback"/>
 
-    <item
-        android:id="@+id/aboutus"
-        android:icon="@drawable/ic_info"
-        android:title="About Us"/>
+
 
         <item
             android:id="@+id/report"
             android:title="Report Us"
             android:icon="@drawable/ic_report"/>
+
+
+        <item
+            android:id="@+id/aboutus"
+            android:icon="@drawable/ic_info"
+            android:title="About Us"/>
 
     </group>
 

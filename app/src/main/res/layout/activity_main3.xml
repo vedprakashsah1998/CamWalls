@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000"
+    android:id="@+id/Rlt"
     tools:context=".Main3Activity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/header2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#8000"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/toolbarcorner"
         android:minHeight="?attr/actionBarSize"
         app:popupTheme="@style/ToolbarTheme1"
         android:elevation="5dp"
@@ -19,19 +20,19 @@
         app:titleTextAppearance="@style/Toolbar.TitleText">
 
         <ImageView
-            android:layout_width="44dp"
-            android:layout_height="44dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:id="@+id/back4"
-            android:src="@drawable/ic_chevron_left_black_24dp"/>
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_back"/>
 
         <TextView
             android:id="@+id/tv1"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="44dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:textAlignment="textStart"
-            android:gravity="start"
+            android:layout_marginStart="20dp"
             android:text="Cam Walls"
             android:textColor="#ffffff"
             android:textSize="30sp"
@@ -39,11 +40,6 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <!--<ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:id="@+id/imgFull"/>-->
 
 
 

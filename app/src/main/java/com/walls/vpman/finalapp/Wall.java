@@ -1,9 +1,13 @@
 package com.walls.vpman.finalapp;
 
+
 public class Wall
 {
-    String original,webformatURL;
 
+    private String original;
+
+
+    private String webformatURL;
     public Wall(String original,String webformatURL)
     {
         this.original = original;

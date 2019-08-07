@@ -1,12 +1,21 @@
 package com.walls.vpman.finalapp;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.cardview.widget.CardView;
+
+import com.google.android.material.textview.MaterialTextView;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 public class Adapter1 extends BaseAdapter
 {
@@ -70,11 +79,21 @@ public class Adapter1 extends BaseAdapter
         {
             view=convertView;
         }
-        ImageView view1=view.findViewById(R.id.animal);
+        RoundedImageView view1=view.findViewById(R.id.animal);
         view1.setImageResource(walls[position]);
-        TextView textView=view.findViewById(R.id.tv2);
+        MaterialTextView textView=view.findViewById(R.id.tv2);
         textView.setText(cats[position]);
+        Animation fromtop, frombottom;
 
+
+
+
+
+        fromtop = AnimationUtils.loadAnimation(context, R.anim.fromtop);
+        frombottom = AnimationUtils.loadAnimation(context, R.anim.frombottom);
+
+        view1.startAnimation(frombottom);
+        textView.startAnimation(fromtop);
 
         return view;
     }

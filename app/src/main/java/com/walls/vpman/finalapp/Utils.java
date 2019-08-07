@@ -7,6 +7,7 @@ import java.util.Random;
 
 public class Utils
 {
+
     public static ColorDrawable[] vibrantLightColorList =
             {
                     new ColorDrawable(Color.parseColor("#cbc6c4")),

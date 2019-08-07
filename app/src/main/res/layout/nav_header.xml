@@ -6,11 +6,19 @@
     android:gravity="bottom"
     android:padding="16dp"
     android:layout_height="192dp"
-    android:background="#8000">
+    android:background="@drawable/navhearderdesign">
 
-    <ImageView
+ <!--   <ImageView
         android:layout_width="64dp"
         android:layout_height="64dp"
+        android:layout_marginTop="-30dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/profile"
+        android:src="@drawable/ic_face_black_24dp"/>-->
+    
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_marginTop="-30dp"
         android:layout_marginLeft="10dp"
         android:id="@+id/profile"
@@ -20,7 +28,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/email"
-        android:textColor="#FCF7F7"
+        android:text="youremail@gmail.com"
+        android:textColor="#FCF9F9"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
 </LinearLayout>

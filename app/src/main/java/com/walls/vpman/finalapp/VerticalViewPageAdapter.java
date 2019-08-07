@@ -2,16 +2,21 @@ package com.walls.vpman.finalapp;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.MotionEventCompat;
 import androidx.viewpager.widget.ViewPager;
 
 public class VerticalViewPageAdapter extends ViewPager
 {
 
+    float x = 0;
+    float mStartDragX = 0;
+    private static final float SWIPE_X_MIN_THRESHOLD = 50;
     public VerticalViewPageAdapter(@NonNull Context context) {
         super(context);
         init();
@@ -31,40 +36,46 @@ public class VerticalViewPageAdapter extends ViewPager
     private class VerticalPageTransformer implements ViewPager.PageTransformer
     {
 
-        private static final float MIN_SCALE=0.65f;
+        private static final float MIN_SCALE = 0.75f;
+        private static final float MIN_ALPHA = 0.75f;
         @Override
         public void transformPage(@NonNull View view, float position) {
+
+            int pageWidth = view.getWidth();
+            int pageHeight = view.getHeight();
             if (position < -1) { // [-Infinity,-1)
                 // This page is way off-screen to the left.
                 view.setAlpha(0);
 
             } else if (position <= 1) { // [-1,1]
-                view.setAlpha(1);
+                view.setAlpha(0.95f);
 
+             /*   float scaleFactor = Math.max(MIN_SCALE, 1 - Math.abs(position));
+                float vertMargin = pageHeight * (1 - scaleFactor) / 2;
+                float horzMargin = pageWidth * (1 - scaleFactor) / 2;
+                if (position < 0) {
+                    view.setTranslationY(vertMargin - horzMargin / 2);
+                } else {
+                    view.setTranslationY(-vertMargin + horzMargin / 2);
+                }*/
+
+                // Scale the page down (between MIN_SCALE and 1)
+               /* view.setScaleX(scaleFactor);
+                view.setScaleY(scaleFactor);
+*/
+                // Fade the page relative to its size.
+  /*              view.setAlpha(MIN_ALPHA +
+                        (scaleFactor - MIN_SCALE) /
+                                (1 - MIN_SCALE) * (1 - MIN_ALPHA));
+*/
                 // Counteract the default slide transition
                 view.setTranslationX(view.getWidth() * -position);
 
-               // view.setTranslationY(view.getHeight() * position);
+
 
                 float yPosition = position * view.getHeight();
                 view.setTranslationY(yPosition);
-                //set Y position to swipe in from top
-               /* float yPosition = position * view.getHeight();
-                view.setTranslationY(yPosition);*/
-
-             /*  view.setScaleX(1);
-               view.setScaleY(1);*/
-
             }
-           /* else if (position<=1)
-            {
-                view.setAlpha(1-position);
-                view.setTranslationX(view.getWidth() * -position);
-                view.setTranslationY(0);
-                float scaleFactor=MIN_SCALE+(1-Math.abs(position));
-                    view.setScaleX(scaleFactor);
-                    view.setScaleY(scaleFactor);
-            }*/
             else { // (1,+Infinity]
                 // This page is way off-screen to the right.
                 view.setAlpha(0);
@@ -85,15 +96,57 @@ public class VerticalViewPageAdapter extends ViewPager
     }
 
     @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
+    public boolean onInterceptTouchEvent(MotionEvent event) {
 
-        boolean intercepted = super.onInterceptTouchEvent(swapXY(ev));
-        swapXY(ev);
+        boolean intercepted = super.onInterceptTouchEvent(swapXY(event));
+        switch (event.getAction() & MotionEventCompat.ACTION_MASK) {
+            case MotionEvent.ACTION_DOWN:
+                x = event.getX();
+                break;
+        }
+        swapXY(event); // return touch coordinates to original reference frame for any child views
         return intercepted;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        return super.onTouchEvent(swapXY(ev));
+
+        if (getAdapter() != null) {
+            if (getCurrentItem() >= 0 || getCurrentItem() < getAdapter().getCount()) {
+                swapXY(ev);
+                final int action = ev.getAction();
+                switch (action & MotionEventCompat.ACTION_MASK) {
+                    case MotionEvent.ACTION_MOVE:
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        mStartDragX = ev.getX();
+                        if (x < mStartDragX
+                                && (mStartDragX - x > SWIPE_X_MIN_THRESHOLD)
+                                && getCurrentItem() > 0) {
+                            Log.i("VerticalViewPager", "down " + x + " : " + mStartDragX + " : " + (mStartDragX - x));
+                            setCurrentItem(getCurrentItem() - 1, true);
+                            return true;
+                        } else if (x > mStartDragX
+                                && (x - mStartDragX > SWIPE_X_MIN_THRESHOLD)
+                                && getCurrentItem() < getAdapter().getCount() - 1) {
+                            Log.i("VerticalViewPager", "up " + x + " : " + mStartDragX + " : " + (x - mStartDragX));
+                            mStartDragX = 0;
+                            setCurrentItem(getCurrentItem() + 1, true);
+                            return true;
+                        }
+                        break;
+                }
+            } else {
+                mStartDragX = 0;
+            }
+            swapXY(ev);
+            return super.onTouchEvent(swapXY(ev));
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canScrollHorizontally(int direction) {
+        return false;
     }
 }

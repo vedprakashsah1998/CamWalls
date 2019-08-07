@@ -9,15 +9,18 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/cam_final_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/cam_logo_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".Photography"></activity>
+        android:largeHeap="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+
+        <activity android:name=".Favourite" />
+        <activity android:name=".Photography" />
         <activity android:name=".IntroActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".WebActivity" />
@@ -40,10 +43,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-2659801811473026~7642733565"/>
+            android:value="ca-app-pub-2659801811473026~7642733565" />
     </application>
-
-
-
 
 </manifest>
