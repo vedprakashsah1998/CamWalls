@@ -33,10 +33,10 @@
 
 
 
-    <!--<item
-        android:id="@+id/collection"
+    <item
+        android:id="@+id/collection007"
         android:icon="@drawable/ic_insert_photo"
-        android:title="Collection"/>-->
+        android:title="Collection"/>
     <item
         android:id="@+id/rate_us"
         android:icon="@drawable/ic_rate_review_black_24dp"

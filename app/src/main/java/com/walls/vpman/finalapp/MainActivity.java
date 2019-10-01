@@ -33,6 +33,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -237,6 +238,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.home) {
             Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_LONG).show();
+            item.setChecked(true);
+            mDrawereLayout.closeDrawers();
+        }
+        if (id==R.id.collection007)
+        {
+            Intent intent = new Intent(MainActivity.this, Collection.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             item.setChecked(true);
             mDrawereLayout.closeDrawers();
         }

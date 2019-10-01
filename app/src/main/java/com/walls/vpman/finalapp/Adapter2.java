@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.kc.unsplash.models.Photo;
 import com.squareup.picasso.Picasso;
 
@@ -17,11 +18,11 @@ import java.util.List;
 public class Adapter2 extends BaseAdapter
 {
 
-    private List<Photo> photos;
+    private List<Photo> photos=new ArrayList<>();
     private Context context;
 
-    public Adapter2(Context context) {
-        photos=new ArrayList<>();
+    public Adapter2(Context context,List<Photo> photos)
+    {
         this.context = context;
     }
 
@@ -56,17 +57,18 @@ public class Adapter2 extends BaseAdapter
         }
 
         ImageView view1=view.findViewById(R.id.collection1);
+        Picasso.get().load(photo.getUrls().getSmall()).resize(2048, 1600)
+                .onlyScaleDown() .into(view1);
 
-        Picasso.get().load(photo.getUrls().getSmall()).into(view1);
 
-        view1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(context,Main3Activity.class);
-                intent.putExtra("img",photo.getUrls().getFull());
-                context.startActivity(intent);
-            }
-        });
+      //  Glide.with(context).load(photo.getUrls().getSmall()).into(view1);
+
+      /*  view1.setOnClickListener(v -> {
+            Intent intent=new Intent(context,Main3Activity.class);
+            intent.putExtra("img",photo.getUrls().getFull());
+            intent.putExtra("position",photo);
+            context.startActivity(intent);
+        });*/
 
 
         // Glide.with(context).load(walls.get(position).getWebformatURL()).into(view1);
@@ -79,4 +81,5 @@ public class Adapter2 extends BaseAdapter
         notifyDataSetChanged();
 
     }
+
 }

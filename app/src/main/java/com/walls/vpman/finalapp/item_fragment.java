@@ -279,86 +279,83 @@ private String Url="https://api.pexels.com/v1/curated?query=flower&per_page=80&p
 
                 //   view.setAdapter(adapter1);
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, JsonUrl,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
+                        response -> {
 
-                                try {
-                                  /*  JSONObject obj = new JSONObject(response);
-                                    //  Log.d("mil gaya",String.valueOf(obj));
-                                    JSONArray wallArray = obj.getJSONArray("photos");
-                                    for (int i = 0; i < wallArray.length(); i++)
-                                    {
-                                        JSONObject wallobj=wallArray.getJSONObject(i);
-                                        JSONObject photographer=new JSONObject(String.valueOf(wallobj));
-                                        JSONObject ProfileUrl=new JSONObject(String.valueOf(wallobj));
-                                        JSONObject jsonObject=wallobj.getJSONObject("src");
-                                        JSONObject object=new JSONObject(String.valueOf(jsonObject));
-                                     //   Log.d("milGaya", String.valueOf(photographer));
-                                        slides.add(object.getString("large2x"));
-                                        slides1.add(photographer.getString("photographer"));
-                                        urlPhotographeer.add(ProfileUrl.getString("url"));
+                            try {
+                              /*  JSONObject obj = new JSONObject(response);
+                                //  Log.d("mil gaya",String.valueOf(obj));
+                                JSONArray wallArray = obj.getJSONArray("photos");
+                                for (int i = 0; i < wallArray.length(); i++)
+                                {
+                                    JSONObject wallobj=wallArray.getJSONObject(i);
+                                    JSONObject photographer=new JSONObject(String.valueOf(wallobj));
+                                    JSONObject ProfileUrl=new JSONObject(String.valueOf(wallobj));
+                                    JSONObject jsonObject=wallobj.getJSONObject("src");
+                                    JSONObject object=new JSONObject(String.valueOf(jsonObject));
+                                 //   Log.d("milGaya", String.valueOf(photographer));
+                                    slides.add(object.getString("large2x"));
+                                    slides1.add(photographer.getString("photographer"));
+                                    urlPhotographeer.add(ProfileUrl.getString("url"));
 
-                                    }
-
-                                    if (check==0)
-                                    {
-                                        Collections.shuffle(slides);
-                                        Collections.shuffle(slides1);
-                                        Collections.shuffle(urlPhotographeer);
-                                        check=1;
-                                        Name=slides1;
-                                        user=urlPhotographeer;
-                                        finalwall=slides;
-                                        adapter1 = new SliderAdapter2(getActivity(), slides);
-                                    }
-                                    else
-                                    {
-                                        adapter1 = new SliderAdapter2(getActivity(), finalwall);
-                                    }
-
-
-
-
-                                    verticalViewPageAdapter.setAdapter(adapter1);
-                                    verticalViewPageAdapter.setCurrentItem(pos);
-                                    setWall=finalwall.get(pos);
-                                    photoName=Name.get(pos);
-                                    photoUrl=user.get(pos);*/
-                                    JSONObject obj = new JSONObject(response);
-                                    Log.d("mila", String.valueOf(obj));
-                                    JSONArray wallArray = obj.getJSONArray("hits");
-                                    for (int i = 0; i < wallArray.length(); i++)
-                                    {
-                                        JSONObject wallObj = wallArray.getJSONObject(i);
-
-
-
-                                        slides.add(wallObj.getString("largeImageURL"));
-                                        // Toast.makeText(Main3Activity.this,wallObj.getString("largeImageURL"),Toast.LENGTH_LONG).show();
-                                    }
-                                    if (check==0)
-                                    {
-                                        Collections.shuffle(slides);
-                                        check=1;
-                                        finalwall=slides;
-                                        adapter1 = new SliderAdapter1(getActivity(), slides);
-                                    }
-                                    else
-                                    {
-                                        adapter1 = new SliderAdapter1(getActivity(), finalwall);
-                                    }
-
-
-
-
-                                    verticalViewPageAdapter.setAdapter(adapter1);
-                                    verticalViewPageAdapter.setCurrentItem(pos);
-                                    setWall=finalwall.get(pos);
-                                } catch (JSONException e) {
-                                    Log.e("Nhi mila1 ", String.valueOf(e));
-                                    e.getStackTrace();
                                 }
+
+                                if (check==0)
+                                {
+                                    Collections.shuffle(slides);
+                                    Collections.shuffle(slides1);
+                                    Collections.shuffle(urlPhotographeer);
+                                    check=1;
+                                    Name=slides1;
+                                    user=urlPhotographeer;
+                                    finalwall=slides;
+                                    adapter1 = new SliderAdapter2(getActivity(), slides);
+                                }
+                                else
+                                {
+                                    adapter1 = new SliderAdapter2(getActivity(), finalwall);
+                                }
+
+
+
+
+                                verticalViewPageAdapter.setAdapter(adapter1);
+                                verticalViewPageAdapter.setCurrentItem(pos);
+                                setWall=finalwall.get(pos);
+                                photoName=Name.get(pos);
+                                photoUrl=user.get(pos);*/
+                                JSONObject obj = new JSONObject(response);
+                                Log.d("mila", String.valueOf(obj));
+                                JSONArray wallArray = obj.getJSONArray("hits");
+                                for (int i = 0; i < wallArray.length(); i++)
+                                {
+                                    JSONObject wallObj = wallArray.getJSONObject(i);
+
+
+
+                                    slides.add(wallObj.getString("largeImageURL"));
+                                    // Toast.makeText(Main3Activity.this,wallObj.getString("largeImageURL"),Toast.LENGTH_LONG).show();
+                                }
+                                if (check==0)
+                                {
+                                    Collections.shuffle(slides);
+                                    check=1;
+                                    finalwall=slides;
+                                    adapter1 = new SliderAdapter1(getActivity(), slides);
+                                }
+                                else
+                                {
+                                    adapter1 = new SliderAdapter1(getActivity(), finalwall);
+                                }
+
+
+
+
+                                verticalViewPageAdapter.setAdapter(adapter1);
+                                verticalViewPageAdapter.setCurrentItem(pos);
+                                setWall=finalwall.get(pos);
+                            } catch (JSONException e) {
+                                Log.e("Nhi mila1 ", String.valueOf(e));
+                                e.getStackTrace();
                             }
                         },
                         new Response.ErrorListener() {

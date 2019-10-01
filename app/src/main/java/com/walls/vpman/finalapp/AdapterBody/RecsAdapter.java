@@ -34,6 +34,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.signature.ObjectKey;
+import com.squareup.picasso.Picasso;
 import com.walls.vpman.finalapp.Main3Activity;
 import com.walls.vpman.finalapp.R;
 import com.walls.vpman.finalapp.Utils;
@@ -117,30 +118,17 @@ public class RecsAdapter extends RecyclerView.Adapter<RecsAdapter.MyViewHolder> 
         requestOptions.placeholder(Utils.getRandomDrawbleColor());
         requestOptions.centerCrop();
 
-        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-/*
-                AlertDialog.Builder builder=new AlertDialog.Builder(context);
-                builder.setTitle("Cam Walls");
-                builder.setMessage("Delete Or Updtae");
-                builder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(context, "Deleted Succesfully", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                AlertDialog alertDialog=builder.create();
-                alertDialog.show();*/
+        holder.relativeLayout.setOnClickListener(v -> {
 
-                Intent intent = new Intent(context, Main3Activity.class);
-                intent.putExtra("img",walls.get(position).getOriginal());
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("query",query);
-                intent.putExtra("position",position);
-               context. startActivity(intent);
-                //context.overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
-            }
+
+            Intent intent = new Intent(context, Main3Activity.class);
+            intent.putExtra("type","Pixabay");
+            intent.putExtra("img",walls.get(position).getOriginal());
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("query",query);
+            intent.putExtra("position",position);
+           context. startActivity(intent);
+            //context.overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
         });
 
         RequestOptions requestOptions1 = new RequestOptions();

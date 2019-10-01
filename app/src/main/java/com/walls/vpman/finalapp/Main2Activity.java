@@ -136,13 +136,10 @@ public class Main2Activity extends AppCompatActivity implements AppBarLayout.OnO
             overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
         });
         back10=findViewById(R.id.back10);
-        back10.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        back10.setOnClickListener(v -> {
 
-                finish();
-                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
-            }
+            finish();
+            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
         });
 
 

@@ -35,7 +35,6 @@ import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.OvershootInterpolator;
 
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -45,12 +44,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
@@ -64,14 +57,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import net.steamcrafted.loadtoast.LoadToast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -88,7 +75,7 @@ public class Main3Activity extends AppCompatActivity {
     List<String> finalwall = new ArrayList<>();
     List<String> strinwall=new ArrayList<>();
     SliderAdapter1 adapter1;
-    private String img;
+    private String img,type;
     TextView textView, textView1;
     List<String> slides = new ArrayList<>();
     private int pos;
@@ -136,21 +123,34 @@ RelativeLayout r;
         img = bundle.getString("img");
         final String query = bundle.getString("query");
          pos = bundle.getInt("position");
-        String key = bundle.getString("key");
+        type=bundle.getString("type");
+      //  String key = bundle.getString("key");
         //ImageView imageView=findViewById(R.id.imgFull);
         //Glide.with(this).load(img).into(imageView);
 
         if (!query.equals("Marvel"))
         {
-            JsonUrl = "https://pixabay.com/api/?key=11708241-4f427f9d829eb00e4ff78f36c&q="+query+" &image_type=photo&per_page=150&safesearch=true";
-            loadWall();
+          //  JsonUrl = "https://pixabay.com/api/?key=11708241-4f427f9d829eb00e4ff78f36c&q="+query+" &image_type=photo&per_page=150&safesearch=true";
+           // loadUnsplash();
+
+          loadWall();
+           /* loadUnsplashCar();
+            loadUnsplashBlack();
+            loadUnsplashEntertainment();
+            loadUnsplashFashion();
+            loadUnsplashMountain();
+            loadUnsplashMusic();
+            loadUnsplashReligion();
+            loadUnsplashTravel();*/
+          // loadUnsplashCar();
         }
 
-        else
+       else
         {
             loadFirebase();
 
         }
+
 
 
 
@@ -185,133 +185,13 @@ RelativeLayout r;
 
 
         fab = findViewById(R.id.fab1);
-      /*  AlphaAnimation fadeIn = new AlphaAnimation(1.0f , 0.0f ) ;
-        AlphaAnimation fadeOut = new AlphaAnimation( 0.0f , 1.0f ) ;
-        fab.startAnimation(fadeIn);
-        fab.startAnimation(fadeOut);
-        fadeIn.setDuration(1000);
-        fadeIn.setFillAfter(true);
-        fadeOut.setDuration(1000);
-        fadeOut.setFillAfter(true);
-        fadeOut.setStartOffset(2200+fadeIn.getStartOffset());*/
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               // animationfab();
 
 
-              /*  final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) Main3Activity.this
-                        .findViewById(android.R.id.content)).getChildAt(0);
-                Blurry.with(Main3Activity.this).radius(10)
-                        .sampling(8)
-                        .color(Color.argb(66, 255, 255, 0))
-                        .async().onto(viewGroup);*/
-                showDialog(Main3Activity.this);
-            }
-        });
-
-      /*  fab1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //animationfab1();
-            }
-        });*/
+        fab.setOnClickListener(v -> showDialog(Main3Activity.this));
 
 
-        floatingActionButton = findViewById(R.id.wallpaper1);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                final LoadToast lt = new LoadToast(Main3Activity.this);
-                lt.setText("Setting...");
-                lt.setTranslationY(1000);
-                lt.setBorderColor(Color.TRANSPARENT);
-                lt.setBorderWidthDp(4);
-                lt.show();
-
-                Glide.with(getApplicationContext()).asBitmap().load(img).into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        Intent share = new Intent(Intent.ACTION_SEND);
-                        share.setType("image/jpeg");
-                        String shareMessage = "\nCam Walls\nDownload the application For awesome wallpapers.\n";
-                        shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n";
-                        share.putExtra(android.content.Intent.EXTRA_TEXT, shareMessage);
-                        ContentValues values = new ContentValues();
-                        values.put(MediaStore.Images.Media.TITLE, "title");
-                        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
-                        Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                                values);
-                        OutputStream outstream;
-                        try {
-                            outstream = getContentResolver().openOutputStream(uri);
-                            resource.compress(Bitmap.CompressFormat.JPEG, 100, outstream);
-                            outstream.close();
-                        } catch (Exception e) {
-                            System.err.println(e.toString());
-                        }
-                        WallpaperManager wallpaperManager = WallpaperManager.getInstance(Main3Activity.this);
-                        startActivity(wallpaperManager.getCropAndSetWallpaperIntent(uri));
-                        lt.success();
-                    }
-                });
-            }
-        });
-        floatingActionButton1 = findViewById(R.id.share1);
-
-        floatingActionButton1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
 
-                ProgressBar progressBar = findViewById(R.id.progress3);
-                progressBar.setVisibility(View.VISIBLE);
-
-                boolean granted = checkWriteExternalPermission();
-                if (granted == true) {
-                    Glide.with(getApplicationContext()).asBitmap()
-                            .load(img)
-                            .into(new SimpleTarget<Bitmap>() {
-                                @Override
-                                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                                    Intent share = new Intent(Intent.ACTION_SEND);
-                                    share.setType("image/jpeg");
-
-                                    ContentValues values = new ContentValues();
-                                    values.put(MediaStore.Images.Media.TITLE, "title");
-                                    values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
-                                    Uri uri = getApplicationContext().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                                            values);
-                                    OutputStream outstream;
-                                    try {
-                                        outstream = Main3Activity.this.getContentResolver().openOutputStream(uri);
-                                        resource.compress(Bitmap.CompressFormat.JPEG, 100, outstream);
-                                        outstream.close();
-                                    } catch (Exception e) {
-                                        System.err.println(e.toString());
-                                    }
-
-                                    share.putExtra(Intent.EXTRA_STREAM, uri);
-                                    share.setType("text/plain");
-                                    share.putExtra(Intent.EXTRA_SUBJECT, "Cam Walls");
-                                    String shareMessage = "\nDownload this application from PlayStore\n\n";
-                                    shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=com.walls.vpman.finalapp";
-                                    share.putExtra(Intent.EXTRA_TEXT, "Cam Walls" + shareMessage);
-                                    startActivity(Intent.createChooser(share, "Share Image"));
-                                    ProgressBar progressBar = findViewById(R.id.progress3);
-                                    progressBar.setVisibility(View.GONE);
-
-                                }
-                            });
-                } else {
-                    requestStoragePermission();
-                }
-
-
-            }
-        });
 
 
     }
@@ -323,63 +203,7 @@ RelativeLayout r;
         super.onBackPressed();
     }
 
-    private void animationfab() {
 
-        if (isOpen) {
-
-            floatingActionButton.startAnimation(fabClose);
-            floatingActionButton1.startAnimation(fabClose);
-            textView.setVisibility(View.GONE);
-            textView1.setVisibility(View.GONE);
-            fab1.hide();
-            floatingActionButton.setClickable(false);
-            floatingActionButton1.setClickable(false);
-
-            isOpen = false;
-        } else {
-            floatingActionButton.startAnimation(fabOpen);
-            floatingActionButton1.startAnimation(fabOpen);
-
-            floatingActionButton.show();
-            floatingActionButton1.show();
-            textView.setVisibility(View.VISIBLE);
-            textView1.setVisibility(View.VISIBLE);
-            fab1.show();
-            floatingActionButton.setClickable(true);
-            floatingActionButton1.setClickable(true);
-            isOpen = true;
-        }
-
-    }
-
-    private void animationfab1() {
-
-        if (isOpen) {
-
-            floatingActionButton.startAnimation(fabClose);
-            floatingActionButton1.startAnimation(fabClose);
-            textView.setVisibility(View.GONE);
-            textView1.setVisibility(View.GONE);
-            fab1.hide();
-            floatingActionButton.setClickable(false);
-            floatingActionButton1.setClickable(false);
-
-            isOpen = false;
-        } else {
-            floatingActionButton.startAnimation(fabOpen);
-            floatingActionButton1.startAnimation(fabOpen);
-
-            floatingActionButton.show();
-            floatingActionButton1.show();
-            textView.setVisibility(View.VISIBLE);
-            textView1.setVisibility(View.VISIBLE);
-            floatingActionButton.setClickable(true);
-            fab.show();
-            floatingActionButton1.setClickable(true);
-            isOpen = true;
-        }
-
-    }
 
     private void requestStoragePermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this,
@@ -430,18 +254,93 @@ RelativeLayout r;
 
        /* ProgressBar progressBar1=findViewById(R.id.progress1);
         progressBar1.setVisibility(View.VISIBLE);*/
-        walls = new ArrayList<>();
+        //walls = new ArrayList<>();
+        strinwall=new ArrayList<>();
         adapter1 = new SliderAdapter1(Main3Activity.this, strinwall);
         final ViewPager view = findViewById(R.id.imgFull);
         view.setAdapter(adapter1);
 
-
+                        if (type.equals("Pixabay"))
+                        {
                             for (int j=0;j<Main2Activity.walls.size();j++)
                             {
                                 strinwall.add(Main2Activity.walls.get(j).getOriginal());
                             }
-
                             adapter1 = new SliderAdapter1(Main3Activity.this, strinwall);
+
+                        }else if (type.equals("UnsplashCar"))
+                        {
+                            for (int k=0;k<Collection.photosCar.size();k++)
+                            {
+                                strinwall.add(String.valueOf(Collection.photosCar.get(k).getUrls().getFull()));
+
+                            }
+                            adapter1 = new SliderAdapter1(Main3Activity.this, strinwall);
+
+                        }
+                        else if (type.equals("UnsplashMountain"))
+                        {
+                            for (int k=0;k<Collection.photosMountain.size();k++)
+                            {
+                                strinwall.add(String.valueOf(Collection.photosMountain.get(k).getUrls().getFull()));
+
+                            }
+                            adapter1 = new SliderAdapter1(Main3Activity.this, strinwall);
+                        }
+                        else if (type.equals("UnsplashEntertainment"))
+                        {
+                            for (int k=0;k<Collection.photosEntertainment.size();k++)
+                            {
+                                strinwall.add(String.valueOf(Collection.photosEntertainment.get(k).getUrls().getFull()));
+
+                            }
+                            adapter1 = new SliderAdapter1(Main3Activity.this, strinwall);
+                        }
+                        else if (type.equals("UnsplashTravel"))
+                        {
+                            for (int k=0;k<Collection.photosTravel.size();k++)
+                            {
+                                strinwall.add(String.valueOf(Collection.photosTravel.get(k).getUrls().getFull()));
+
+                            }
+                            adapter1 = new SliderAdapter1(Main3Activity.this, strinwall);
+                        }
+                        else if (type.equals("UnsplashFashion"))
+                        {
+                            for (int k=0;k<Collection.photosFashion.size();k++)
+                            {
+                                strinwall.add(String.valueOf(Collection.photosFashion.get(k).getUrls().getFull()));
+
+                            }
+                            adapter1 = new SliderAdapter1(Main3Activity.this, strinwall);
+                        }
+                        else if (type.equals("UnsplashMusic"))
+                        {
+                            for (int k=0;k<Collection.photosMusic.size();k++)
+                            {
+                                strinwall.add(String.valueOf(Collection.photosMusic.get(k).getUrls().getFull()));
+
+                            }
+                            adapter1 = new SliderAdapter1(Main3Activity.this, strinwall);
+                        }
+                        else if (type.equals("UnsplashBlack"))
+                        {
+                            for (int k=0;k<Collection.photosBlack.size();k++)
+                            {
+                                strinwall.add(String.valueOf(Collection.photosBlack.get(k).getUrls().getFull()));
+
+                            }
+                            adapter1 = new SliderAdapter1(Main3Activity.this, strinwall);
+                        }
+                        else if (type.equals("UnsplashReligion"))
+                        {
+                            for (int k=0;k<Collection.photosReligion.size();k++)
+                            {
+                                strinwall.add(String.valueOf(Collection.photosReligion.get(k).getUrls().getFull()));
+
+                            }
+                            adapter1 = new SliderAdapter1(Main3Activity.this, strinwall);
+                        }
 
                             view.setAdapter(adapter1);
                             view.setCurrentItem(pos);

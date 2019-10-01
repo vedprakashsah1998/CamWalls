@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 
@@ -23,6 +24,9 @@ public class Collection extends AppCompatActivity {
     private final String CLIENT_ID = "d3a92adcee2ef1d4cee1b52e80ae2c7f8ca95494ece74c74ae9c396fe8ba941a";
     private Unsplash unsplash,unsplash1,unsplash2,unsplash3,unsplash4,unsplash5,unsplash6,unsplash7;
     Toolbar toolbar;
+   static List<Photo> photosCar,photosMountain,photosEntertainment,photosTravel,photosFashion,photosMusic,photosBlack,photosReligion;
+   // String[] query007 = {"Car","Mountain","Entertainment","Travel","Fashion","Music","Black","Religion"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,14 +40,13 @@ public class Collection extends AppCompatActivity {
         unsplash5=new Unsplash(CLIENT_ID);
         unsplash6=new Unsplash(CLIENT_ID);
         unsplash7=new Unsplash(CLIENT_ID);
-        adapter2=new Adapter2(this);
-        adapter3=new Adapter2(this);
-        adapter4=new Adapter2(this);
-        adapter5=new Adapter2(this);
-        adapter6=new Adapter2(this);
-        adapter7=new Adapter2(this);
-        adapter8=new Adapter2(this);
-        adapter9=new Adapter2(this);
+
+
+
+
+
+
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.
                 LayoutParams.FLAG_FULLSCREEN);
 
@@ -58,34 +61,48 @@ public class Collection extends AppCompatActivity {
         GridView gridView5=findViewById(R.id.gridViewAmoled);
         GridView gridView6=findViewById(R.id.gridViewScience);
         GridView gridView7=findViewById(R.id.gridViewReligion);
-        gridView.setAdapter(adapter2);
-        gridView1.setAdapter(adapter3);
-        gridView2.setAdapter(adapter4);
-        gridView3.setAdapter(adapter5);
-        gridView4.setAdapter(adapter6);
-        gridView5.setAdapter(adapter7);
-        gridView6.setAdapter(adapter8);
-        gridView7.setAdapter(adapter9);
-
-        String query = "Car";
+       String query = "Car";
 
 
 
-            unsplash.searchPhotos(query,1,20,"portrait", new Unsplash.OnSearchCompleteListener() {
+        unsplash.searchPhotos(query,1,20,"portrait", new Unsplash.OnSearchCompleteListener() {
 
-                @Override
-                public void onComplete(SearchResults results) {
-                    Log.d("Photos", "Total Results Found " + results.getTotal());
+            @Override
+            public void onComplete(SearchResults results) {
+                Log.d("Photos", "Total Results Found " + results.getTotal());
+                adapter2=new Adapter2(Collection.this,photosCar);
 
-                    List<Photo> photos = results.getResults();
-                    adapter2.setPhotos(photos);
-                }
+               photosCar = results.getResults();
+               adapter2.setPhotos(photosCar);
 
-                @Override
-                public void onError(String error) {
-                    Log.d("Unsplash", error);
-                }
-            });
+                gridView.setAdapter(adapter2);
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.d("Unsplash", error);
+            }
+        });
+
+        gridView.setOnItemClickListener((parent, view, position, id) -> {
+
+            Intent intent=new Intent(Collection.this,Main3Activity.class);
+            Photo photo=photosCar.get(position);
+            intent.putExtra("type","UnsplashCar");
+            intent.putExtra("img",photo.getUrls().getFull());
+           // Log.d("photo",photo.getUrls().getFull());
+          //  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("query",query);
+            intent.putExtra("position",position);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+        });
+
+
+
+
+
+
 
 
         String query1="Mountain";
@@ -94,9 +111,45 @@ public class Collection extends AppCompatActivity {
             @Override
             public void onComplete(SearchResults results) {
                 Log.d("Photos", "Total Results Found " + results.getTotal());
+                adapter3=new Adapter2(Collection.this,photosMountain);
+                 photosMountain = results.getResults();
+                adapter3.setPhotos(photosMountain);
 
-                List<Photo> photos = results.getResults();
-                adapter3.setPhotos(photos);
+
+                gridView1.setAdapter(adapter3);
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.d("Unsplash", error);
+            }
+        });
+        gridView1.setOnItemClickListener((parent, view, position, id) -> {
+
+            Intent intent=new Intent(Collection.this,Main3Activity.class);
+            Photo photo=photosCar.get(position);
+            intent.putExtra("type","UnsplashMountain");
+            intent.putExtra("img",photo.getUrls().getFull());
+            // Log.d("photo",photo.getUrls().getFull());
+            //  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("query",query);
+            intent.putExtra("position",position);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+
+        });
+    String query2="Entertainment";
+
+        unsplash2.searchPhotos(query2,1,20,"portrait", new Unsplash.OnSearchCompleteListener() {
+            @Override
+            public void onComplete(SearchResults results) {
+                Log.d("Photos", "Total Results Found " + results.getTotal());
+                adapter4=new Adapter2(Collection.this,photosEntertainment);
+
+                photosEntertainment = results.getResults();
+                adapter4.setPhotos(photosEntertainment);
+
+                gridView2.setAdapter(adapter4);
             }
 
             @Override
@@ -105,21 +158,17 @@ public class Collection extends AppCompatActivity {
             }
         });
 
-    String query2="Entertainment";
-
-        unsplash2.searchPhotos(query2,1,20,"portrait", new Unsplash.OnSearchCompleteListener() {
-            @Override
-            public void onComplete(SearchResults results) {
-                Log.d("Photos", "Total Results Found " + results.getTotal());
-
-                List<Photo> photos = results.getResults();
-                adapter4.setPhotos(photos);
-            }
-
-            @Override
-            public void onError(String error) {
-                Log.d("Unsplash", error);
-            }
+        gridView2.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent=new Intent(Collection.this,Main3Activity.class);
+            Photo photo=photosCar.get(position);
+            intent.putExtra("type","UnsplashEntertainment");
+            intent.putExtra("img",photo.getUrls().getFull());
+            // Log.d("photo",photo.getUrls().getFull());
+            //  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("query",query);
+            intent.putExtra("position",position);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
         });
 
         String query3="Travel";
@@ -127,9 +176,12 @@ public class Collection extends AppCompatActivity {
             @Override
             public void onComplete(SearchResults results) {
                 Log.d("Photos", "Total Results Found " + results.getTotal());
+                adapter5=new Adapter2(Collection.this,photosTravel);
+                 photosTravel = results.getResults();
+                adapter5.setPhotos(photosTravel);
 
-                List<Photo> photos = results.getResults();
-                adapter5.setPhotos(photos);
+
+                gridView3.setAdapter(adapter5);
             }
 
             @Override
@@ -138,20 +190,51 @@ public class Collection extends AppCompatActivity {
             }
         });
 
+        gridView3.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent=new Intent(Collection.this,Main3Activity.class);
+            Photo photo=photosCar.get(position);
+            intent.putExtra("type","UnsplashTravel");
+            intent.putExtra("img",photo.getUrls().getFull());
+            // Log.d("photo",photo.getUrls().getFull());
+            //  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("query",query);
+            intent.putExtra("position",position);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+
+        });
+
+
         String query4="Fashion";
         unsplash4.searchPhotos(query4,1,20,"portrait", new Unsplash.OnSearchCompleteListener() {
             @Override
             public void onComplete(SearchResults results) {
                 Log.d("Photos", "Total Results Found " + results.getTotal());
+                adapter6=new Adapter2(Collection.this,photosFashion);
 
-                List<Photo> photos = results.getResults();
-                adapter6.setPhotos(photos);
+               photosFashion = results.getResults();
+                adapter6.setPhotos(photosFashion);
+                gridView4.setAdapter(adapter6);
             }
 
             @Override
             public void onError(String error) {
                 Log.d("Unsplash", error);
             }
+        });
+
+        gridView4.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent=new Intent(Collection.this,Main3Activity.class);
+            Photo photo=photosCar.get(position);
+            intent.putExtra("type","UnsplashFashion");
+            intent.putExtra("img",photo.getUrls().getFull());
+            // Log.d("photo",photo.getUrls().getFull());
+            //  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("query",query);
+            intent.putExtra("position",position);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+
         });
 
         String query5="Music";
@@ -159,9 +242,12 @@ public class Collection extends AppCompatActivity {
             @Override
             public void onComplete(SearchResults results) {
                 Log.d("Photos", "Total Results Found " + results.getTotal());
+                adapter7=new Adapter2(Collection.this,photosMusic);
+                 photosMusic = results.getResults();
+                adapter7.setPhotos(photosMusic);
 
-                List<Photo> photos = results.getResults();
-                adapter7.setPhotos(photos);
+                gridView5.setAdapter(adapter7);
+
             }
 
             @Override
@@ -170,20 +256,53 @@ public class Collection extends AppCompatActivity {
             }
         });
 
+gridView5.setOnItemClickListener((parent, view, position, id) -> {
+    Intent intent=new Intent(Collection.this,Main3Activity.class);
+    Photo photo=photosCar.get(position);
+    intent.putExtra("type","UnsplashMusic");
+    intent.putExtra("img",photo.getUrls().getFull());
+    // Log.d("photo",photo.getUrls().getFull());
+    //  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    intent.putExtra("query",query);
+    intent.putExtra("position",position);
+    startActivity(intent);
+    overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
 
+});
         String query6="Black";
         unsplash6.searchPhotos(query6,1,20,"portrait", new Unsplash.OnSearchCompleteListener() {
             @Override
             public void onComplete(SearchResults results) {
                 Log.d("Photos", "Total Results Found " + results.getTotal());
+                adapter8=new Adapter2(Collection.this,photosBlack);
 
-                List<Photo> photos = results.getResults();
-                adapter8.setPhotos(photos);
+                photosBlack = results.getResults();
+                adapter8.setPhotos(photosBlack);
+
+                gridView6.setAdapter(adapter8);
+
+
             }
 
             @Override
             public void onError(String error) {
                 Log.d("Unsplash", error);
+            }
+        });
+        gridView6.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(Collection.this,Main3Activity.class);
+                Photo photo=photosCar.get(position);
+                intent.putExtra("type","UnsplashBlack");
+                intent.putExtra("img",photo.getUrls().getFull());
+                // Log.d("photo",photo.getUrls().getFull());
+                //  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("query",query);
+                intent.putExtra("position",position);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+
             }
         });
 
@@ -192,9 +311,11 @@ public class Collection extends AppCompatActivity {
             @Override
             public void onComplete(SearchResults results) {
                 Log.d("Photos", "Total Results Found " + results.getTotal());
+                adapter9=new Adapter2(Collection.this,photosReligion);
 
-                List<Photo> photos = results.getResults();
-                adapter9.setPhotos(photos);
+                 photosReligion = results.getResults();
+                adapter9.setPhotos(photosReligion);
+                gridView7.setAdapter(adapter9);
             }
 
             @Override
@@ -203,21 +324,31 @@ public class Collection extends AppCompatActivity {
             }
         });
 
+        gridView7.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent=new Intent(Collection.this,Main3Activity.class);
+            Photo photo=photosCar.get(position);
+            intent.putExtra("type","UnsplashReligion");
+            intent.putExtra("img",photo.getUrls().getFull());
+            // Log.d("photo",photo.getUrls().getFull());
+            //  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("query",query);
+            intent.putExtra("position",position);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+
+        });
         ImageView back2=findViewById(R.id.back2);
-        back2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(Collection.this,MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        back2.setOnClickListener(v -> {
+            /*Intent intent=new Intent(Collection.this,MainActivity.class);
+            startActivity(intent);*/
+            finish();
         });
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent=new Intent(Collection.this,MainActivity.class);
-        startActivity(intent);
+        /*Intent intent=new Intent(Collection.this,MainActivity.class);
+        startActivity(intent);*/
         finish();
         super.onBackPressed();
     }
