@@ -9,49 +9,940 @@
 
 
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#070707"
-        android:minHeight="?attr/actionBarSize"
-        app:popupTheme="@style/ToolbarTheme1"
-        android:elevation="5dp"
-        app:titleTextColor="#FDFCFC"
-        app:titleTextAppearance="@style/Toolbar.TitleText">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:id="@+id/back"
-            android:src="@drawable/ic_back"/>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv1"
-            android:layout_width="200dp"
-            android:layout_height="44dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/dancingscript_regular"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            android:text="Categories"
-            android:textColor="#ffffff"
-            android:textSize="35sp"
-            android:textStyle="normal" />
-
-    </androidx.appcompat.widget.Toolbar>
+  <com.google.android.material.textview.MaterialTextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/categoryText"
+      android:textSize="48sp"
+      android:text="Category"
+      app:textAllCaps="true"
+      android:padding="12dp"
+      android:textStyle="bold"
+      android:textColor="#FFFFFF"
+      />
 
 
+  <HorizontalScrollView
+      android:id="@+id/horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/categoryText"
+      android:layout_marginTop="4dp"
+      android:paddingEnd="22dp"
+      android:scrollbars="none">
 
-    <GridView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/gridViewCategory"
-        android:numColumns="1"
-        android:layout_below="@+id/header"
-        android:stretchMode="columnWidth"
-        android:gravity="center"/>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp">
+
+
+
+
+          <com.mikhaellopez.circularimageview.CircularImageView
+              android:id="@+id/Landscape"
+              android:layout_width="140dp"
+              android:layout_height="140dp"
+              android:scaleType="centerCrop"
+              android:transitionName="img1"
+              app:civ_border_width="2dp"
+              app:civ_shadow="true"
+              app:civ_shadow_color="#9E9E9E"
+
+              app:civ_shadow_radius="20"
+
+              />
+          <com.google.android.material.textview.MaterialTextView
+              android:id="@+id/landScape"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_centerInParent="true"
+              android:fontFamily="@font/eagle_lake"
+              android:text="Landscape"
+              android:textColor="#FFFFFF"
+              android:textSize="16sp"
+              android:transitionName="text"
+              app:fontFamily="@font/eagle_lake"/>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp">
+
+
+
+
+          <com.mikhaellopez.circularimageview.CircularImageView
+              android:id="@+id/Cityscape"
+              android:layout_width="140dp"
+              android:layout_height="140dp"
+              android:scaleType="centerCrop"
+              android:transitionName="img1"
+              app:civ_border_width="2dp"
+              app:civ_shadow="true"
+
+              app:civ_shadow_color="#9E9E9E"
+              app:civ_shadow_radius="20" />
+          <com.google.android.material.textview.MaterialTextView
+              android:id="@+id/cityScape"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_centerInParent="true"
+              android:fontFamily="@font/eagle_lake"
+              android:text="Cityscape"
+
+              android:textColor="#FFFFFF"
+              android:textSize="16sp"
+              android:transitionName="text" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp">
+
+
+
+          <com.mikhaellopez.circularimageview.CircularImageView
+              android:id="@+id/Seascape"
+              android:layout_width="140dp"
+              android:layout_height="140dp"
+              android:scaleType="centerCrop"
+              android:transitionName="img1"
+              app:civ_border_width="2dp"
+              app:civ_shadow="true"
+              app:civ_shadow_color="#9E9E9E"
+
+              app:civ_shadow_radius="20" />
+
+          <com.google.android.material.textview.MaterialTextView
+              android:id="@+id/seaScape"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_centerInParent="true"
+              android:fontFamily="@font/eagle_lake"
+              android:text="Seascape"
+
+              android:textColor="#FFFFFF"
+              android:textSize="16sp"
+              android:transitionName="text" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp">
+
+
+
+          <com.mikhaellopez.circularimageview.CircularImageView
+              android:id="@+id/Twilight"
+              android:layout_width="140dp"
+              android:layout_height="140dp"
+              android:scaleType="centerCrop"
+
+              android:transitionName="img1"
+              app:civ_border_width="2dp"
+              app:civ_shadow="true"
+              app:civ_shadow_color="#9E9E9E"
+              app:civ_shadow_radius="20" />
+
+          <com.google.android.material.textview.MaterialTextView
+              android:id="@+id/twiLight"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_centerInParent="true"
+              android:fontFamily="@font/eagle_lake"
+              android:text="Twilight"
+              android:textColor="#FFFFFF"
+
+              android:textSize="16sp"
+              android:transitionName="text" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp">
+
+
+
+          <com.mikhaellopez.circularimageview.CircularImageView
+              android:id="@+id/Food"
+              android:layout_width="140dp"
+              android:layout_height="140dp"
+              android:scaleType="centerCrop"
+
+              android:transitionName="img1"
+              app:civ_border_width="2dp"
+              app:civ_shadow="true"
+              app:civ_shadow_color="#9E9E9E"
+              app:civ_shadow_radius="20" />
+
+          <com.google.android.material.textview.MaterialTextView
+              android:id="@+id/fOOD"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_centerInParent="true"
+              android:fontFamily="@font/eagle_lake"
+              android:text="Food"
+
+              android:textColor="#FFFFFF"
+              android:textSize="16sp"
+              android:transitionName="text" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp">
+
+
+
+          <com.mikhaellopez.circularimageview.CircularImageView
+              android:id="@+id/DronView"
+              android:layout_width="140dp"
+              android:layout_height="140dp"
+
+              android:scaleType="centerCrop"
+              android:transitionName="img1"
+              app:civ_border_width="2dp"
+              app:civ_shadow="true"
+              app:civ_shadow_color="#9E9E9E"
+              app:civ_shadow_radius="20" />
+
+          <com.google.android.material.textview.MaterialTextView
+              android:id="@+id/DroneView991"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_centerInParent="true"
+              android:fontFamily="@font/eagle_lake"
+              android:text="Drone View"
+
+              android:textColor="#FFFFFF"
+              android:textSize="16sp"
+              android:transitionName="text" />
+        </RelativeLayout>
+
+
+      </LinearLayout>
+    </FrameLayout>
+
+
+  </HorizontalScrollView>
+
+
+  <HorizontalScrollView
+      android:id="@+id/horizontalWala"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/horizontal"
+      android:layout_marginTop="22dp"
+      android:scrollbars="none">
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp">
+
+
+
+
+          <com.makeramen.roundedimageview.RoundedImageView
+              android:id="@+id/Nature"
+              android:layout_width="260dp"
+              android:layout_height="match_parent"
+              android:scaleType="centerCrop"
+              android:transitionName="img1"
+              app:riv_corner_radius="40dp"
+              android:src="@drawable/nature"
+              app:riv_mutate_background="true"
+              android:padding="12dp"
+              />
+<RelativeLayout
+    android:layout_width="260dp"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@drawable/minibackground">
+
+  <com.google.android.material.textview.MaterialTextView
+      android:id="@+id/natureText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:fontFamily="@font/eagle_lake"
+      android:text="Nature"
+      android:padding="12dp"
+      android:layout_centerHorizontal="true"
+      android:textColor="#FFFFFF"
+      android:textSize="32sp"
+      android:transitionName="text"
+      app:fontFamily="@font/eagle_lake"/>
+  <com.google.android.material.textview.MaterialTextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Ved Prakash"
+      android:textColor="#FDFCFC"
+
+      app:fontFamily="@font/eagle_lake"
+      android:padding="12dp"
+      android:layout_below="@+id/natureText"
+
+
+      android:textStyle="normal"
+      android:textSize="22sp"
+      android:id="@+id/photoGrapherName"/>
+
+</RelativeLayout>
+
+
+
+
+
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp">
+
+
+
+
+          <com.makeramen.roundedimageview.RoundedImageView
+              android:id="@+id/Bokeh"
+              android:layout_width="260dp"
+              android:layout_height="match_parent"
+              android:scaleType="centerCrop"
+              android:transitionName="img1"
+              android:padding="12dp"
+
+              app:riv_mutate_background="true"
+              app:riv_corner_radius="40dp"
+              android:src="@drawable/nature"
+           />
+          <RelativeLayout
+              android:layout_width="260dp"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:background="@drawable/minibackground">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/bokehText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eagle_lake"
+                android:text="Bokeh"
+                android:padding="12dp"
+                android:layout_centerHorizontal="true"
+                android:textColor="#FFFFFF"
+                android:textSize="32sp"
+                android:transitionName="text"
+                app:fontFamily="@font/eagle_lake"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ved Prakash"
+                android:textColor="#FDFCFC"
+
+                app:fontFamily="@font/eagle_lake"
+                android:padding="12dp"
+                android:layout_below="@+id/bokehText"
+
+
+                android:textStyle="normal"
+                android:textSize="22sp"
+                android:id="@+id/photoGrapherName1"/>
+
+          </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp">
+
+
+
+
+          <com.makeramen.roundedimageview.RoundedImageView
+              android:id="@+id/Star"
+              android:layout_width="260dp"
+              android:layout_height="match_parent"
+              android:scaleType="centerCrop"
+              android:transitionName="img1"
+              android:padding="12dp"
+
+              app:riv_mutate_background="true"
+              app:riv_corner_radius="40dp"
+              android:src="@drawable/nature"
+           />
+          <RelativeLayout
+              android:layout_width="260dp"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:background="@drawable/minibackground">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/starText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eagle_lake"
+                android:text="Star"
+                android:padding="12dp"
+                android:layout_centerHorizontal="true"
+                android:textColor="#FFFFFF"
+                android:textSize="32sp"
+                android:transitionName="text"
+                app:fontFamily="@font/eagle_lake"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ved Prakash"
+                android:textColor="#FDFCFC"
+
+                app:fontFamily="@font/eagle_lake"
+                android:padding="12dp"
+                android:layout_below="@+id/starText"
+
+
+                android:textStyle="normal"
+                android:textSize="22sp"
+                android:id="@+id/photoGrapherName2"/>
+
+          </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp">
+
+
+
+
+          <com.makeramen.roundedimageview.RoundedImageView
+              android:id="@+id/DroneView"
+              android:layout_width="260dp"
+              android:layout_height="match_parent"
+              android:scaleType="centerCrop"
+              android:transitionName="img1"
+              android:padding="12dp"
+              app:riv_mutate_background="true"
+              app:riv_corner_radius="40dp"
+              android:src="@drawable/nature"
+           />
+          <RelativeLayout
+              android:layout_width="260dp"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:background="@drawable/minibackground">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/droneText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eagle_lake"
+                android:text="Drone View"
+                android:padding="12dp"
+                android:layout_centerHorizontal="true"
+                android:textColor="#FFFFFF"
+                android:textSize="32sp"
+                android:transitionName="text"
+                app:fontFamily="@font/eagle_lake"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ved Prakash"
+                android:textColor="#FDFCFC"
+
+                app:fontFamily="@font/eagle_lake"
+                android:padding="12dp"
+                android:layout_below="@+id/droneText"
+
+
+                android:textStyle="normal"
+                android:textSize="22sp"
+                android:id="@+id/photoGrapherName3"/>
+
+          </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp">
+
+
+
+
+          <com.makeramen.roundedimageview.RoundedImageView
+              android:id="@+id/Mountain"
+              android:layout_width="260dp"
+              android:layout_height="match_parent"
+              android:scaleType="centerCrop"
+              android:transitionName="img1"
+              android:padding="12dp"
+
+              app:riv_mutate_background="true"
+              app:riv_corner_radius="40dp"
+              android:src="@drawable/nature"
+           />
+          <RelativeLayout
+              android:layout_width="260dp"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:background="@drawable/minibackground">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/mountain_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eagle_lake"
+                android:text="Mountain"
+                android:padding="12dp"
+                android:layout_centerHorizontal="true"
+                android:textColor="#FFFFFF"
+                android:textSize="32sp"
+                android:transitionName="text"
+                app:fontFamily="@font/eagle_lake"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ved Prakash"
+                android:textColor="#FDFCFC"
+
+                app:fontFamily="@font/eagle_lake"
+                android:padding="12dp"
+                android:layout_below="@+id/mountain_text"
+
+
+                android:textStyle="normal"
+                android:textSize="22sp"
+                android:id="@+id/photoGrapherName4"/>
+
+          </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp">
+
+
+
+
+          <com.makeramen.roundedimageview.RoundedImageView
+              android:id="@+id/Dark"
+              android:layout_width="260dp"
+              android:layout_height="match_parent"
+              android:scaleType="centerCrop"
+              android:transitionName="img1"
+              android:padding="12dp"
+
+              app:riv_mutate_background="true"
+              app:riv_corner_radius="40dp"
+              android:src="@drawable/nature"
+           />
+          <RelativeLayout
+              android:layout_width="260dp"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:background="@drawable/minibackground">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/darkText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eagle_lake"
+                android:text="Dark"
+                android:padding="12dp"
+                android:layout_centerHorizontal="true"
+                android:textColor="#FFFFFF"
+                android:textSize="32sp"
+                android:transitionName="text"
+                app:fontFamily="@font/eagle_lake"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ved Prakash"
+                android:textColor="#FDFCFC"
+
+                app:fontFamily="@font/eagle_lake"
+                android:padding="12dp"
+                android:layout_below="@+id/darkText"
+
+
+                android:textStyle="normal"
+                android:textSize="22sp"
+                android:id="@+id/photoGrapherName5"/>
+
+          </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp">
+
+
+
+
+          <com.makeramen.roundedimageview.RoundedImageView
+              android:id="@+id/sky"
+              android:layout_width="260dp"
+              android:layout_height="match_parent"
+              android:scaleType="centerCrop"
+              android:transitionName="img1"
+              android:padding="12dp"
+
+              app:riv_mutate_background="true"
+              app:riv_corner_radius="40dp"
+              android:src="@drawable/nature"
+           />
+          <RelativeLayout
+              android:layout_width="260dp"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:background="@drawable/minibackground">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/skyText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eagle_lake"
+                android:text="Sky"
+                android:padding="12dp"
+                android:layout_centerHorizontal="true"
+                android:textColor="#FFFFFF"
+                android:textSize="32sp"
+                android:transitionName="text"
+                app:fontFamily="@font/eagle_lake"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ved Prakash"
+                android:textColor="#FDFCFC"
+
+                app:fontFamily="@font/eagle_lake"
+                android:padding="12dp"
+                android:layout_below="@+id/skyText"
+
+
+                android:textStyle="normal"
+                android:textSize="22sp"
+                android:id="@+id/photoGrapherName6"/>
+
+          </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp">
+
+
+
+
+          <com.makeramen.roundedimageview.RoundedImageView
+              android:id="@+id/Forest"
+              android:layout_width="260dp"
+              android:layout_height="match_parent"
+              android:scaleType="centerCrop"
+              android:transitionName="img1"
+              android:padding="12dp"
+
+              app:riv_mutate_background="true"
+              app:riv_corner_radius="40dp"
+              android:src="@drawable/nature"
+           />
+          <RelativeLayout
+              android:layout_width="260dp"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:background="@drawable/minibackground">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/forest_Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eagle_lake"
+                android:text="Forest"
+                android:padding="12dp"
+                android:layout_centerHorizontal="true"
+                android:textColor="#FFFFFF"
+                android:textSize="32sp"
+                android:transitionName="text"
+                app:fontFamily="@font/eagle_lake"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ved Prakash"
+                android:textColor="#FDFCFC"
+
+                app:fontFamily="@font/eagle_lake"
+                android:padding="12dp"
+                android:layout_below="@+id/forest_Text"
+
+
+                android:textStyle="normal"
+                android:textSize="22sp"
+                android:id="@+id/photoGrapherName7"/>
+
+          </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp">
+
+
+
+
+          <com.makeramen.roundedimageview.RoundedImageView
+              android:id="@+id/PhotoGraphy"
+              android:layout_width="260dp"
+              android:layout_height="match_parent"
+              android:scaleType="centerCrop"
+              android:transitionName="img1"
+              android:padding="12dp"
+
+              app:riv_mutate_background="true"
+              app:riv_corner_radius="40dp"
+              android:src="@drawable/nature"
+           />
+          <RelativeLayout
+              android:layout_width="260dp"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:background="@drawable/minibackground">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/photographyText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eagle_lake"
+                android:text="Photography"
+                android:padding="12dp"
+                android:layout_centerHorizontal="true"
+                android:textColor="#FFFFFF"
+                android:textSize="32sp"
+                android:transitionName="text"
+                app:fontFamily="@font/eagle_lake"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ved Prakash"
+                android:textColor="#FDFCFC"
+
+                app:fontFamily="@font/eagle_lake"
+                android:padding="12dp"
+                android:layout_below="@+id/photographyText"
+
+
+                android:textStyle="normal"
+                android:textSize="22sp"
+                android:id="@+id/photoGrapherName8"/>
+
+          </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp">
+
+
+
+
+          <com.makeramen.roundedimageview.RoundedImageView
+              android:id="@+id/Technology"
+              android:layout_width="260dp"
+              android:layout_height="match_parent"
+              android:scaleType="centerCrop"
+              android:transitionName="img1"
+              android:padding="12dp"
+
+              app:riv_mutate_background="true"
+              app:riv_corner_radius="40dp"
+              android:src="@drawable/nature"
+           />
+          <RelativeLayout
+              android:layout_width="260dp"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:background="@drawable/minibackground">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tech_Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eagle_lake"
+                android:text="Technology"
+                android:padding="12dp"
+                android:layout_centerHorizontal="true"
+                android:textColor="#FFFFFF"
+                android:textSize="32sp"
+                android:transitionName="text"
+                app:fontFamily="@font/eagle_lake"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ved Prakash"
+                android:textColor="#FDFCFC"
+
+                app:fontFamily="@font/eagle_lake"
+                android:padding="12dp"
+                android:layout_below="@+id/tech_Text"
+
+
+                android:textStyle="normal"
+                android:textSize="22sp"
+                android:id="@+id/photoGrapherName9"/>
+
+          </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp">
+
+
+
+
+          <com.makeramen.roundedimageview.RoundedImageView
+              android:id="@+id/Beach"
+              android:layout_width="260dp"
+              android:layout_height="match_parent"
+              android:scaleType="centerCrop"
+              android:transitionName="img1"
+              android:padding="12dp"
+
+              app:riv_mutate_background="true"
+              app:riv_corner_radius="40dp"
+              android:src="@drawable/nature"
+           />
+          <RelativeLayout
+              android:layout_width="260dp"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:background="@drawable/minibackground">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/beachText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eagle_lake"
+                android:text="Beach"
+                android:padding="12dp"
+                android:layout_centerHorizontal="true"
+                android:textColor="#FFFFFF"
+                android:textSize="32sp"
+                android:transitionName="text"
+                app:fontFamily="@font/eagle_lake"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ved Prakash"
+                android:textColor="#FDFCFC"
+
+                app:fontFamily="@font/eagle_lake"
+                android:padding="12dp"
+                android:layout_below="@+id/beachText"
+
+
+                android:textStyle="normal"
+                android:textSize="22sp"
+                android:id="@+id/photoGrapherName10"/>
+
+          </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp">
+
+
+
+
+          <com.makeramen.roundedimageview.RoundedImageView
+              android:id="@+id/adventure"
+              android:layout_width="260dp"
+              android:layout_height="match_parent"
+              android:scaleType="centerCrop"
+              android:transitionName="img1"
+              android:padding="12dp"
+
+              app:riv_mutate_background="true"
+              app:riv_corner_radius="40dp"
+              android:src="@drawable/nature"
+           />
+          <RelativeLayout
+              android:layout_width="260dp"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:background="@drawable/minibackground">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/adventureText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eagle_lake"
+                android:text="Adventure"
+                android:padding="12dp"
+                android:layout_centerHorizontal="true"
+                android:textColor="#FFFFFF"
+                android:textSize="32sp"
+                android:transitionName="text"
+                app:fontFamily="@font/eagle_lake"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ved Prakash"
+                android:textColor="#FDFCFC"
+
+                app:fontFamily="@font/eagle_lake"
+                android:padding="12dp"
+                android:layout_below="@+id/adventureText"
+
+
+                android:textStyle="normal"
+                android:textSize="22sp"
+                android:id="@+id/photoGrapherName11"/>
+
+          </RelativeLayout>
+        </RelativeLayout>
+
+
+
+
+
+      </LinearLayout>
+    </FrameLayout>
+
+
+  </HorizontalScrollView>
+
+
 
 
 </RelativeLayout>

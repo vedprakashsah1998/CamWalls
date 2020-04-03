@@ -48,11 +48,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.BuildConfig;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.walls.vpman.finalapp.Activity.SearchActivity;
 
 
 import net.steamcrafted.loadtoast.LoadToast;
@@ -73,7 +75,7 @@ public class Main3Activity extends AppCompatActivity {
     private List<Wall> walls;
     int check=0;
     List<String> finalwall = new ArrayList<>();
-    List<String> strinwall=new ArrayList<>();
+    List<String> strinwall;
     SliderAdapter1 adapter1;
     private String img,type;
     TextView textView, textView1;
@@ -251,16 +253,22 @@ RelativeLayout r;
 
     private void loadWall() {
 
-
-       /* ProgressBar progressBar1=findViewById(R.id.progress1);
-        progressBar1.setVisibility(View.VISIBLE);*/
-        //walls = new ArrayList<>();
         strinwall=new ArrayList<>();
-        adapter1 = new SliderAdapter1(Main3Activity.this, strinwall);
+        /*adapter1 = new SliderAdapter1(Main3Activity.this, strinwall);*/
         final ViewPager view = findViewById(R.id.imgFull);
-        view.setAdapter(adapter1);
 
-                        if (type.equals("Pixabay"))
+        for (int k=0;k<SearchActivity.listData.size();k++)
+        {
+            strinwall.add(SearchActivity.listData.get(k).getLarge2x());
+        }
+        adapter1 = new SliderAdapter1(Main3Activity.this, strinwall);
+        view.setAdapter(adapter1);
+        view.setCurrentItem(pos);
+        img= strinwall.get(pos);
+
+
+
+/*                        if (type.equals("Pixabay"))
                         {
                             for (int j=0;j<Main2Activity.walls.size();j++)
                             {
@@ -340,11 +348,9 @@ RelativeLayout r;
 
                             }
                             adapter1 = new SliderAdapter1(Main3Activity.this, strinwall);
-                        }
+                        }*/
 
-                            view.setAdapter(adapter1);
-                            view.setCurrentItem(pos);
-                            img= strinwall.get(pos);
+
 
 
 
@@ -368,9 +374,9 @@ RelativeLayout r;
                /* adapter1 = new Adapter(Main2Activity.this, walls);
                 view.setAdapter(adapter1);*/
 
-                for (int j=0;j<Main2Activity.walls.size();j++)
+                for (int j=0;j<SearchActivity.walls.size();j++)
                 {
-                    strinwall.add((Main2Activity.walls.get(j).getOriginal()));
+                    strinwall.add((SearchActivity.walls.get(j).getOriginal()));
                 }
 
 

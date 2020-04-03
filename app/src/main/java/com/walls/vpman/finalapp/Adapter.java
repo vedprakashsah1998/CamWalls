@@ -70,7 +70,9 @@ public class Adapter extends BaseAdapter
         }
 
         ImageView view1=view.findViewById(R.id.imageView);
+/*
         final ProgressBar progressBar=view.findViewById(R.id.progress09);
+*/
 
         Animation fromtop, frombottom;
 
@@ -120,13 +122,15 @@ public class Adapter extends BaseAdapter
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+/*
                             progressBar.setVisibility(View.VISIBLE);
+*/
                             return false;
                         }
 
                         @Override
                         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            progressBar.setVisibility(View.GONE);
+                            /*progressBar.setVisibility(View.GONE);*/
                             //   holder.progressBar.setVisibility(View.GONE);
                             return false;
                         }
@@ -145,13 +149,13 @@ public class Adapter extends BaseAdapter
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            progressBar.setVisibility(View.VISIBLE);
+                            /*progressBar.setVisibility(View.VISIBLE);*/
                             return false;
                         }
 
                         @Override
                         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            progressBar.setVisibility(View.GONE);
+                            /*progressBar.setVisibility(View.GONE);*/
                             //   holder.progressBar.setVisibility(View.GONE);
                             return false;
                         }

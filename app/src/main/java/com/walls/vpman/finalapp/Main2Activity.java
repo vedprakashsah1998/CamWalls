@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -146,10 +147,10 @@ public class Main2Activity extends AppCompatActivity implements AppBarLayout.OnO
 
         final CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
         collapsingToolbarLayout.setTitle("");
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+/*        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(true);
         mLayoutmanager=new GridLayoutManager(this,2);
-        recyclerView.setLayoutManager(mLayoutmanager);
+        recyclerView.setLayoutManager(mLayoutmanager);*/
      /*   GridView gridView=findViewById(R.id.gridView);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -190,14 +191,19 @@ public class Main2Activity extends AppCompatActivity implements AppBarLayout.OnO
 /*
         adapter1=new Adapter(this,walls);
 */
+        RecyclerView recyclerView1=findViewById(R.id.my_recycler_view);
         recsAdapter=new RecsAdapter(this,walls,query);
-        final RecyclerView recyclerView1=findViewById(R.id.my_recycler_view);
-        RecyclerView.LayoutManager mLayoutmanager1;
+
+        LinearLayoutManager linearLayoutManager=new GridLayoutManager(this,2,GridLayoutManager.VERTICAL,false);
+
+        recyclerView1.setLayoutManager(linearLayoutManager);
+
+        recyclerView1.setHasFixedSize(true);
+
         recyclerView1.setItemAnimator(new DefaultItemAnimator());
         recyclerView1.setNestedScrollingEnabled(true);
-        mLayoutmanager1=new GridLayoutManager(this,2);
-        recyclerView1.setLayoutManager(mLayoutmanager1);
-
+        int itemViewType = 0;
+        recyclerView1.getRecycledViewPool().setMaxRecycledViews(itemViewType, 0);
         recyclerView1.setAdapter(recsAdapter);
 /*
         final GridView view=findViewById(R.id.gridView);

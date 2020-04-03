@@ -34,6 +34,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.signature.ObjectKey;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 import com.walls.vpman.finalapp.Main3Activity;
 import com.walls.vpman.finalapp.R;
@@ -118,7 +119,7 @@ public class RecsAdapter extends RecyclerView.Adapter<RecsAdapter.MyViewHolder> 
         requestOptions.placeholder(Utils.getRandomDrawbleColor());
         requestOptions.centerCrop();
 
-        holder.relativeLayout.setOnClickListener(v -> {
+        holder.view1.setOnClickListener(v -> {
 
 
             Intent intent = new Intent(context, Main3Activity.class);
@@ -153,13 +154,13 @@ public class RecsAdapter extends RecyclerView.Adapter<RecsAdapter.MyViewHolder> 
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            holder.progressBar.setVisibility(View.VISIBLE);
+                            /*holder.progressBar.setVisibility(View.VISIBLE);*/
                             return false;
                         }
 
                         @Override
                         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            holder.progressBar.setVisibility(View.GONE);
+                            /*holder.progressBar.setVisibility(View.GONE);*/
                             //   holder.progressBar.setVisibility(View.GONE);
                             return false;
                         }
@@ -177,13 +178,13 @@ public class RecsAdapter extends RecyclerView.Adapter<RecsAdapter.MyViewHolder> 
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            holder.progressBar.setVisibility(View.VISIBLE);
+                            /*holder.progressBar.setVisibility(View.VISIBLE);*/
                             return false;
                         }
 
                         @Override
                         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            holder.progressBar.setVisibility(View.GONE);
+                            /*holder.progressBar.setVisibility(View.GONE);*/
                             //   holder.progressBar.setVisibility(View.GONE);
                             return false;
                         }
@@ -209,7 +210,7 @@ public class RecsAdapter extends RecyclerView.Adapter<RecsAdapter.MyViewHolder> 
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView view1;
+        RoundedImageView view1;
         OnItemClickListener onItemClickListener;
         ProgressBar progressBar;
         Animation fromtop, frombottom;
@@ -220,8 +221,12 @@ public class RecsAdapter extends RecyclerView.Adapter<RecsAdapter.MyViewHolder> 
         public MyViewHolder(@NonNull View itemView, OnItemClickListener onItemClickListener) {
             super(itemView);
             view1 = itemView.findViewById(R.id.imageView);
+/*
             progressBar = itemView.findViewById(R.id.progress09);
+*/
+/*
             relativeLayout = itemView.findViewById(R.id.listPhoto007);
+*/
             fromtop = AnimationUtils.loadAnimation(context, R.anim.fromtop);
             frombottom = AnimationUtils.loadAnimation(context, R.anim.frombottom);
             zoomin = AnimationUtils.loadAnimation(context, R.anim.zoom_in);

@@ -34,6 +34,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
+import com.walls.vpman.finalapp.Activity.SearchActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -241,7 +242,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             item.setChecked(true);
             mDrawereLayout.closeDrawers();
         }
-        if (id==R.id.collection007)
+    /*    if (id==R.id.collection007)
         {
             Intent intent = new Intent(MainActivity.this, Collection.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -249,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             item.setChecked(true);
             mDrawereLayout.closeDrawers();
-        }
+        }*/
 
         if (id == R.id.category) {
 
@@ -492,7 +493,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportActionBar().setTitle(query);
                 query1 = query;
                 JsonUrl = "https://pixabay.com/api/?key=11708241-4f427f9d829eb00e4ff78f36c&q="+query+"&image_type=photo&per_page=150&safesearch=true";
-                Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("search", query);
                 startActivity(intent);
