@@ -69,7 +69,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import jp.wasabeef.glide.transformations.BlurTransformation;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -406,7 +406,6 @@ public class Main2Activity extends AppCompatActivity implements AppBarLayout.OnO
                 RequestOptions requestOptions = new RequestOptions();
                 requestOptions.error(Utils.getRandomDrawbleColor());
                 requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
-                requestOptions.bitmapTransform(new BlurTransformation(122));
                 Glide.with(Main2Activity.this)
                         .load(walls.get(n).getOriginal())
                         .apply(requestOptions)

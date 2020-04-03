@@ -35,7 +35,6 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 
-import jp.wasabeef.glide.transformations.BlurTransformation;
 
 public class SliderAdapter1 extends PagerAdapter
 {
@@ -110,7 +109,6 @@ public class SliderAdapter1 extends PagerAdapter
         requestOptions.priority(Priority.IMMEDIATE);
         requestOptions.transform(new BlurBuilder(context));
         requestOptions.skipMemoryCache(false);
-        requestOptions.transform(new BlurTransformation());
         requestOptions.onlyRetrieveFromCache(true);
         requestOptions.isMemoryCacheable();
         requestOptions.diskCacheStrategy(DiskCacheStrategy.AUTOMATIC);

@@ -7,8 +7,8 @@ android {
         applicationId "com.walls.vpman.finalapp"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 22
-        versionName "2.2"
+        versionCode 23
+        versionName "2.3"
         renderscriptTargetApi 28
         renderscriptSupportModeEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -27,17 +27,24 @@ android {
 
     packagingOptions {
         pickFirst 'lib/armeabi-v7a/libRSSupport.so'
-        pickFirst 'lib/arm64-v8a/libRSSupport.so'
-        pickFirst 'lib/x86_64/libRSSupport.so'
-        pickFirst 'lib/x86/libRSSupport.so'
-        pickFirst 'lib/arm64-v8a/librsjni.so'
-        pickFirst 'lib/x86/librsjni.so'
-        pickFirst 'lib/x86_64/librsjni.so'
-        pickFirst 'lib/armeabi-v7a/librsjni.so'
-        pickFirst 'lib/x86_64/librsjni_androidx.so'
         pickFirst 'lib/armeabi-v7a/librsjni_androidx.so'
-        pickFirst 'lib/x86/librsjni_androidx.so'
+        pickFirst 'lib/armeabi-v7a/librsjni.so'
+        pickFirst 'lib/armeabi-v7a/libblasV8.so'
+
+        pickFirst 'lib/arm64-v8a/librsjni.so'
         pickFirst 'lib/arm64-v8a/librsjni_androidx.so'
+        pickFirst 'lib/arm64-v8a/libRSSupport.so'
+        pickFirst 'lib/arm64-v8a/libblasV8.so'
+
+        pickFirst 'lib/x86_64/libRSSupport.so'
+        pickFirst 'lib/x86_64/librsjni.so'
+        pickFirst 'lib/x86_64/librsjni_androidx.so'
+        pickFirst 'lib/x86_64/libblasV8.so'
+
+        pickFirst 'lib/x86/libRSSupport.so'
+        pickFirst 'lib/x86/librsjni.so'
+        pickFirst 'lib/x86/librsjni_androidx.so'
+        pickFirst 'lib/x86/libblasV8.so'
     }
 
 
@@ -84,7 +91,7 @@ dependencies {
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
-    implementation 'com.google.android.gms:play-services-auth:17.0.0'
+    implementation 'com.google.android.gms:play-services-auth:18.0.0'
 
     implementation 'com.firebaseui:firebase-ui-auth:5.0.0'
     implementation "com.google.android.gms:play-services-gcm:17.0.0"
@@ -106,8 +113,7 @@ dependencies {
 
     implementation 'com.chootdev:blurimg:1.0.1'
     //BlurView
-    implementation 'at.favre.lib:dali:0.3.5'
-    implementation 'jp.wasabeef:glide-transformations:4.0.1'
+
     // implementation 'com.github.jgabrielfreitas:BlurImageView:1.0.1'
 
     //Round Image
